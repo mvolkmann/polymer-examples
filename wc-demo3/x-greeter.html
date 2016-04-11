@@ -1,0 +1,46 @@
+<template id="greet-template">
+  <style>
+    :host {
+      background-color: linen;
+      border: solid red 3px;
+      display: block;
+      padding: 10px;
+      width: 250px;
+    }
+    h1 {
+      color: red;
+      margin: 0;
+    }
+    p {
+      margin-bottom: 0;
+    }
+  </style>
+
+  <h1>Hello, <span id="name">World</span>!</h1>
+  <p>This is a second line of content.</p>
+</template>
+
+<script>
+  const link = document.querySelector('#x-greeter-import');
+  const template = link.import.querySelector('#greet-template');
+
+  const XGreeter = Object.create(HTMLElement.prototype);
+  XGreeter.createdCallback = function () {
+    const name = this.getAttribute('name');
+
+    const clone = template.content.cloneNode(true);
+    clone.querySelector('#name').textContent = name;
+
+    const shadowRoot = this.createShadowRoot();
+    shadowRoot.appendChild(clone);
+
+    console.log('in createdCallback, this =', this);
+    console.log('in createdCallback, this.parentNode =', this.parentNode);
+    console.log('in createdCallback, shadowRoot.parentNode =', shadowRoot.parentNode);
+  };
+  document.registerElement('x-greeter', {prototype: XGreeter});
+
+  const xGreeter = document.querySelector('x-greeter');
+  //TODO: Why is this null?
+  console.log('xGreeter.shadowRoot =', xGreeter.shadowRoot);
+</script>

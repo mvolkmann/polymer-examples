@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Web Components Demo</title>
+    <script>
+       function handleLoad(e) {
+         console.log('Loaded', e.target.href);
+       }
+       function handleError(e) {
+         console.error('Error loading', e.target.href);
+       }
+     </script>
+
+     <link id="x-greeter-import" rel="import" href="x-greeter.html"
+       onload="handleLoad(event)" onerror="handleError(event)">
+  </head>
+  <body>
+    <x-greeter name="Mark"></x-greeter>
+  </body>
+</html>

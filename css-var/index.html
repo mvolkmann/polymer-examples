@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CSS Variables</title>
+    <script src="webcomponents.js"></script>
+
+    <!-- This demonstrates getting and setting CSS variables from JavaScript. -->
+    <script src="demo.js"></script>
+
+    <style is="custom-style">
+      :root {
+        --error-color: red;
+        --row-height: 10px;
+        --row-count: 5;
+        --total-height: calc(var(--row-count) * var(--row-height));
+      }
+
+      .section1 {
+        border: solid red 1px;
+        height: var(--total-height);
+        --error-color: green;
+        --font-style: italic;
+      }
+
+      .error {
+        color: var(--error-color);
+        font-style: var(--font-style);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="section1">
+      <div class="error">Error in section1</div>
+    </div>
+    <div class="section2">
+      <div class="error">Error in section2</div>
+    </div>
+  </body>
+</html>

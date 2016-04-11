@@ -1,0 +1,19 @@
+<template id="greet-template">
+  <h1>Hello, <span id="name">World</span>!</h1>
+</template>
+
+<script>
+  //const link = document.querySelector('link[rel="import"]');
+  const link = document.querySelector('#x-greeter-import');
+  const template = link.import.querySelector('#greet-template');
+
+  const XGreeter = Object.create(HTMLElement.prototype);
+  XGreeter.createdCallback = function () {
+    const name = this.getAttribute('name');
+
+    const clone = template.content.cloneNode(true);
+    clone.querySelector('#name').textContent = name;
+    this.appendChild(clone);
+  };
+  document.registerElement('x-greeter', {prototype: XGreeter});
+</script>

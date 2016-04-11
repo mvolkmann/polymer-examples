@@ -1,0 +1,22 @@
+{
+  "name": "todo",
+  "authors": [
+    "R. Mark Volkmann <r.mark.volkmann@gmail.com>"
+  ],
+  "description": "Todo app in Polymer",
+  "main": "index.html",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.4.0"
+  }
+}

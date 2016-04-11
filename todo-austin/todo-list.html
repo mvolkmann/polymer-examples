@@ -1,0 +1,103 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="./todo-item.html">
+
+<!-- @demo demo/todo-list-demo.html -->
+<dom-module id="todo-list">
+  <template>
+    <style>
+      :host {
+        /*If you want to propagate styles through DOM encapsulation, it's recommended to use CSS mixins and CSS variables*/
+        --button-styles: {
+          border-radius: 5px;
+          margin-left: 10px;
+        }
+      }
+      button {
+        @apply(--button-styles);
+      }
+
+      input {
+        width: 180px;
+      }
+
+      ul {
+        list-style: none;
+        margin-left: 0;
+        padding-left: 0;
+      }
+    </style>
+
+    <h2>To Do List</h2>
+    <div>
+      {{doneCount}} of {{todos.length}} remaining
+      <button on-click="_archiveCompleted">
+        Archive Completed
+      </button>
+    </div>
+    <br/>
+    <form>
+      <input type="text" autofocus
+        placeholder="enter new todo here"
+        value="{{todoText::input}}">
+      <button disabled="{{!todoText}}" on-click="_addTodo">
+        Add
+      </button>
+    </form>
+    <ul>
+      <template is="dom-repeat" items="{{todos}}" as="todo">
+        <todo-item index="[[index]]" done="{{todo.done}}" text="[[todo.text]]"></todo-item>
+      </template>
+    </ul>
+  </template>
+
+  <script>
+    let lastId = 0;
+
+    function createTodo(text, done = false) {
+      return {id: ++lastId, text, done};
+    }
+
+    Polymer({
+      is: 'todo-list',
+      properties: {
+        todoText: {
+          type: String,
+          value: ''
+        },
+        todos: {
+          type: Array,
+          value: [
+            createTodo('learn Polymer', true),
+            createTodo('build a Polymer app')
+          ]
+        },
+        doneCount: {
+          type: Number,
+          // Polymer lets you bind to what you want, in this case I want to know when todos.* (a child) changes
+          // however I also want to do my calculations based on the entire array, and I'm not worried about the
+          // function running twice, so I'm just passing both, could be optimized to just use todos.* and change
+          // how I'm calculating the value so I don't need both.
+          computed: '_getUncompletedCount(todos, todos.*)',
+          // The parent can't change the value, but it will get notifications of changes
+          readOnly: true,
+          notify: true
+        }
+      },
+      attached() {
+        // Add deletion event listener, using attached so it's only ever run once (ready can hit multiple times)
+        this.$$('ul').addEventListener('on-delete-todo', event =>
+          this.splice('todos', event.target.index, 1));
+      },
+      _addTodo() {
+        this.push('todos', createTodo(this.todoText));
+        this.todoText = '';
+      },
+      _archiveCompleted() {
+        this.todos = this.todos.filter(t => !t.done);
+      },
+      _getUncompletedCount(todos) {
+        return todos.filter(todo => !todo.done).length;
+      }
+    });
+  </script>
+</dom-module>

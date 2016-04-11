@@ -1,0 +1,46 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<!-- @demo demo/todo-item-demo.html -->
+<dom-module id="todo-item">
+  <template>
+    <style>
+      button {
+        @apply(--button-styles);
+      }
+
+      li {
+        margin-top: 5px;
+      }
+
+      .done-true {
+        color: gray;
+        text-decoration: line-through;
+      }
+    </style>
+
+    <li>
+      <input type="checkbox" checked="{{done}}" on-click="_toggleDone">
+      <span class$="done-{{done}}">{{text}}</span>
+      <button on-click="_deleteTodo">Delete</button>
+    </li>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'todo-item',
+      properties: {
+        done: {
+          type: Boolean,
+          notify: true
+        },
+        text: String
+      },
+      _toggleDone() {
+        this.done = !this.done;
+      },
+      _deleteTodo() {
+        this.fire('on-delete-todo');
+      }
+    });
+  </script>
+</dom-module>

@@ -1,0 +1,45 @@
+<dom-module id="todo-item">
+  <template>
+    <style>
+      button {
+        @apply(--button-style);
+      }
+
+      li {
+        margin-top: 5px;
+      }
+
+      .done-true {
+        color: gray;
+        text-decoration: line-through;
+      }
+    </style>
+
+    <li id="foo">
+      <input id="bar" type="checkbox" checked="{{todo.done}}" on-click="_toggleDone">
+      <span class$="done-{{todo.done}}">{{todo.text}}</span>
+      <button on-click="_deleteTodo">Delete</button>
+    </li>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'todo-item',
+      properties: {
+        todo: Object
+      },
+      _deleteTodo() {
+        //TODO: This approach is probably discouraged.
+        //this.domHost._deleteTodo(this.todo.id);
+
+        this.fire('delete-todo', this.todo.id);
+        console.log('this =', this);
+        console.log('this.$.foo =', this.$.foo);
+        console.log('this.$.bar =', this.$.bar);
+      },
+      _toggleDone() {
+        this.set('todo.done', !this.todo.done);
+      }
+    });
+  </script>
+</dom-module>

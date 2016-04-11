@@ -1,0 +1,99 @@
+<link rel="import" href="./todo-item.html">
+
+<dom-module id="todo-list">
+  <template>
+    <style>
+      :host {
+        /* To propagate styles into descendant components, use CSS mixins. */
+        --button-style: {
+          border-radius: 5px;
+          margin-left: 10px;
+        }
+      }
+
+      button {
+        @apply(--button-style);
+      }
+
+      input[type=text] {
+        width: 180px;
+      }
+
+      ul {
+        list-style: none;
+        margin-left: 0;
+        padding-left: 0;
+      }
+    </style>
+
+    <h2>To Do List</h2>
+    <div>
+      {{_getUncompletedCount()}} of {{todos.length}} remaining
+      <button on-click="_archiveCompleted">
+        Archive Completed
+      </button>
+    </div>
+    <br/>
+    <form>
+      <input type="text" autofocus
+        placeholder="enter new todo here"
+        value="{{todoText::input}}">
+      <button disabled="{{!todoText}}" on-click="_addTodo">
+        Add
+      </button>
+    </form>
+    <ul>
+      <template is="dom-repeat" items="{{todos}}" as="todo">
+      <todo-item todo="[[todo]]"></todo-item>
+      </template>
+    </ul>
+  </template>
+
+  <script>
+    let lastId = 0;
+
+    function createTodo(text, done = false) {
+      return {id: ++lastId, text, done};
+    }
+
+    Polymer({
+      is: 'todo-list',
+      properties: {
+        todoText: String,
+        todos: {
+          type: Array,
+          value: [
+            createTodo('learn Polymer', true),
+            createTodo('build a Polymer app')
+          ]
+        }
+      },
+      listeners: {
+        //'delete-todo': '_deleteTodo'
+        'delete-todo': event => {
+          const todoId = event.detail;
+          const index = this.todos.findIndex(t => t.id === todoId);
+          this.splice('todos', index, 1);
+        }
+      },
+      _addTodo() {
+        this.push('todos', createTodo(this.todoText));
+        this.todoText = '';
+      },
+      _archiveCompleted() {
+        this.todos = this.todos.filter(t => !t.done);
+      },
+      _deleteTodo(event) {
+        const todoId = event.detail;
+        const index = this.todos.findIndex(t => t.id === todoId);
+        this.splice('todos', index, 1);
+      },
+      _getUncompletedCount() {
+        //TODO: Can you avoid verifying that this.todos is set?
+        return this.todos ?
+          this.todos.filter(todo => !todo.done).length :
+          0;
+      }
+    });
+  </script>
+</dom-module>

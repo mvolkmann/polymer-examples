@@ -1,0 +1,21 @@
+<template id="greet-template">
+  <style>
+    ::content span {
+      font-style: italic;
+    }
+  </style>
+  <h1>Hello, <content></content>!</h1>
+</template>
+
+<script>
+  const link = document.querySelector('#x-greeter-import');
+  const template = link.import.querySelector('#greet-template');
+
+  const XGreeter = Object.create(HTMLElement.prototype);
+  XGreeter.createdCallback = function () {
+    const clone = template.content.cloneNode(true);
+    const shadowRoot = this.createShadowRoot();
+    shadowRoot.appendChild(clone);
+  };
+  document.registerElement('x-greeter', {prototype: XGreeter});
+</script>

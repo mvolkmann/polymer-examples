@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Web Components Demo</title>
+    <style>
+      x-greeter::shadow input {
+        border: solid green 3px;
+      }
+    </style>
+    <script>
+       function handleLoad(e) {
+         console.log('Loaded', e.target.href);
+       }
+       function handleError(e) {
+         console.error('Error loading', e.target.href);
+       }
+     </script>
+
+     <link id="x-greeter-import" rel="import" href="x-greeter.html"
+       onload="handleLoad(event)" onerror="handleError(event)">
+  </head>
+  <body>
+    <h1>Shadow DOM Demo</h1>
+    <x-greeter name="Mark"></x-greeter>
+  </body>
+</html>
