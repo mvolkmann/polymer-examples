@@ -1,6 +1,8 @@
 <dom-module id="x-greeter">
   <style>
     :host {
+      /*--header-color: red;*/
+
       background-color: linen;
       border: solid red 3px;
       display: block;
@@ -8,7 +10,7 @@
       width: 250px;
     }
     h1 {
-      color: red;
+      color: var(--header-color, pink);
       margin: 0;
     }
     p {
