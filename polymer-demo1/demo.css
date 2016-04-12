@@ -1,7 +1,0 @@
-x-greeter { /* works */
-  outline: solid blue 5px;
-}
-
-:root {
-  --header-color: blue;
-}

@@ -4,27 +4,34 @@
     <title>CSS Variables</title>
     <script src="webcomponents.js"></script>
 
+    <link rel="import" href="./theme.html">
+
     <!-- This demonstrates getting and setting CSS variables from JavaScript. -->
     <script src="demo.js"></script>
 
     <style is="custom-style">
+      <!-- Since this isn't inside a component,
+           we can't use :host here like in polymer-demo1.
+           Using :root makes it so we can't override
+           these CSS variables from theme.html -->
       :root {
-        --error-color: red;
-        --row-height: 10px;
-        --row-count: 5;
-        --total-height: calc(var(--row-count) * var(--row-height));
+        --my-error-color: var(--error-color, red);
+        --my-font-size: var(--font-size, 18px);
+        --my-row-height: var(--row-height, 10px);
+        --my-row-count: var(--row-count, 5);
+        --my-total-height: calc(var(--my-row-count) * var(--my-row-height));
       }
 
       .section1 {
         border: solid red 1px;
-        height: var(--total-height);
-        --error-color: green;
-        --font-style: italic;
+        height: var(--my-total-height);
+        --my-error-color: green;
+        --my-font-size: 24px;
       }
 
       .error {
-        color: var(--error-color);
-        font-style: var(--font-style);
+        color: var(--my-error-color);
+        font-size: var(--my-font-size);
       }
     </style>
   </head>
