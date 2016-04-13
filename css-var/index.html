@@ -23,6 +23,11 @@
         --my-total-height: calc(var(--my-row-count) * var(--my-row-height));
       }
 
+      .error {
+        color: var(--my-error-color);
+        font-size: var(--my-font-size);
+      }
+
       .section1 {
         border: solid red 1px;
         height: var(--my-total-height);
@@ -30,9 +35,8 @@
         --my-font-size: 24px;
       }
 
-      .error {
-        color: var(--my-error-color);
-        font-size: var(--my-font-size);
+      .section3 {
+        @apply(--my-theme)
       }
     </style>
   </head>
@@ -42,6 +46,9 @@
     </div>
     <div class="section2">
       <div class="error">Error in section2</div>
+    </div>
+    <div class="section3">
+      This text is in section 3.
     </div>
   </body>
 </html>

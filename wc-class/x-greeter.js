@@ -1,8 +1,5 @@
-'use strict';
-
 class XGreeter extends HTMLElement {
   createdCallback() {
-    console.log('x-greeter.js createdCallback: entered');
     const name = this.getAttribute('name');
     this.createShadowRoot().innerHTML =
       `<h1>Hello, ${name}!</h1>
@@ -11,4 +8,3 @@ class XGreeter extends HTMLElement {
 }
 
 document.registerElement('x-greeter', XGreeter);
-console.log('x-greeter.js: created element');

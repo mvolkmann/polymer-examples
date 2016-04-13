@@ -1,8 +1,6 @@
 <dom-module id="x-greeter">
   <style is="custom-style">
     :host {
-      /*--header-color: red;*/
-
       background-color: linen;
       border: solid red 3px;
       display: block;
@@ -10,12 +8,11 @@
       width: 250px;
     }
     h1 {
-      color: var(--header-color, pink);
+      color: red;
       margin: 0;
     }
     p {
       margin-bottom: 0;
-      @apply(--my-theme)
     }
   </style>
 
@@ -25,9 +22,14 @@
   </template>
 
   <script>
-    Polymer({
-      is: 'x-greeter',
-      properties: {name: String}
-    });
+    class XGreeter {
+      beforeRegister() {
+        this.is = 'x-greeter';
+        this.properties = {name: String};
+      }
+      // Can add other lifecycle methods here.
+    }
+
+    Polymer(XGreeter);
   </script>
 </dom-module>
