@@ -1,0 +1,22 @@
+{
+  "name": "css-var",
+  "homepage": "https://github.com/mvolkmann/polymer-examples",
+  "authors": [
+    "R. Mark Volkmann <r.mark.volkmann@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.4.0"
+  }
+}
