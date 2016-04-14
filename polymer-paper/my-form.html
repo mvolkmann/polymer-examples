@@ -1,5 +1,8 @@
 <dom-module id="my-form">
   <style is="custom-style">
+    vaadin-date-picker {
+      display: inline-block;
+    }
     vaadin-grid {
       width: 400px;
     }
@@ -27,7 +30,7 @@
         <paper-date-picker date="April 16, 1961"></paper-date-picker>
 
         <div>
-          <vaadin-date-picker style="display: inline-block" label="Birthday" value="{{birthday}}">
+          <vaadin-date-picker inline-block" label="Birthday" value="{{birthday}}">
           </vaadin-date-picker>
           Your birthday is {{birthday}}.
         </div>
