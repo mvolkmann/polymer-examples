@@ -1,10 +1,6 @@
 <dom-module id="my-form">
   <style is="custom-style">
-    :host {
-      /*font-family: sans-serif;*/
-    }
-
-    #color-grid {
+    vaadin-grid {
       width: 400px;
     }
   </style>
@@ -13,26 +9,31 @@
     <paper-card heading="My Form">
       <div class="card-content">
         <div>
-          <paper-checkbox></paper-checkbox><label>Hungry?</label>
+          <paper-checkbox checked="{{hungry}}"></paper-checkbox>
+          <label>Hungry?</label>
+          <template is="dom-if" if="{{hungry}}">Have a Snickers.</template>
         </div>
 
         <div>
           <label>Flavor</label>
-          <paper-radio-group selected="v">
+          <paper-radio-group selected="{{flavor}}">
             <paper-radio-button name="v">Vanilla</paper-radio-button>
             <paper-radio-button name="c">Chocolate</paper-radio-button>
             <paper-radio-button name="s">Strawberry</paper-radio-button>
           </paper-radio-group>
+          flavor = {{flavor}}
         </div>
 
         <paper-date-picker date="April 16, 1961"></paper-date-picker>
 
         <div>
-          <vaadin-date-picker style="display: inline-block" label="Birthday" value="1961-04-16"></vaadin-date-picker>
+          <vaadin-date-picker style="display: inline-block" label="Birthday" value="{{birthday}}">
+          </vaadin-date-picker>
+          Your birthday is {{birthday}}.
         </div>
 
         <paper-input id="filter" label="Filter by name"></paper-input>
-        <vaadin-grid id="color-grid" selection-mode="multi">
+        <vaadin-grid selection-mode="multi">
           <table>
             <colgroup>
               <col name="name" sortable="" sort-direction="asc">
@@ -68,7 +69,17 @@
   <script>
     Polymer({
       is: 'my-form',
-      properties: {},
+      properties: {
+        birthday: {
+          type: String,
+          value: '1961-04-16'
+        },
+        flavor: {
+          type: String,
+          value: 'v' // initial value
+        },
+        hungry: Boolean
+      },
       ready() {
         const props = ['name', 'color'];
         this.submitDialog = document.querySelector('#submit-dialog');
