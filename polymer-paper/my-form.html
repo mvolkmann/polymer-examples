@@ -1,0 +1,106 @@
+<dom-module id="my-form">
+  <style is="custom-style">
+    :host {
+      /*font-family: sans-serif;*/
+    }
+
+    #color-grid {
+      width: 400px;
+    }
+  </style>
+
+  <template>
+    <paper-card heading="My Form">
+      <div class="card-content">
+        <div>
+          <paper-checkbox></paper-checkbox><label>Hungry?</label>
+        </div>
+
+        <div>
+          <label>Flavor</label>
+          <paper-radio-group selected="v">
+            <paper-radio-button name="v">Vanilla</paper-radio-button>
+            <paper-radio-button name="c">Chocolate</paper-radio-button>
+            <paper-radio-button name="s">Strawberry</paper-radio-button>
+          </paper-radio-group>
+        </div>
+
+        <paper-date-picker date="April 16, 1961"></paper-date-picker>
+
+        <div>
+          <vaadin-date-picker style="display: inline-block" label="Birthday" value="1961-04-16"></vaadin-date-picker>
+        </div>
+
+        <paper-input id="filter" label="Filter by name"></paper-input>
+        <vaadin-grid id="color-grid" selection-mode="multi">
+          <table>
+            <colgroup>
+              <col name="name" sortable="" sort-direction="asc">
+              <col name="color" sortable="">
+            </colgroup>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Favorite Color</th>
+              </tr>
+            </thead>
+          </table>
+        </vaadin-grid>
+      </div>
+
+      <div class="card-actions">
+        <paper-button raised on-tap="_onSubmit">Submit</paper-button>
+      </div>
+    </paper-card>
+
+    <paper-dialog id="submit-dialog">
+      <h2>My Dialog Title</h2>
+      <p>
+        My dialog content goes here.
+      </p>
+      <div class="buttons">
+        <paper-button dialog-dismiss>Cancel</paper-button>
+        <paper-button dialog-confirm>Accept</paper-button>
+      </div>
+    </paper-dialog>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'my-form',
+      properties: {},
+      ready() {
+        const props = ['name', 'color'];
+        this.submitDialog = document.querySelector('#submit-dialog');
+
+        // Populate the grid.
+        const grid = document.querySelector("vaadin-grid");
+        const data = [
+          {name: 'Mark', color: 'yellow'},
+          {name: 'Tami', color: 'blue'}
+        ];
+        grid.items = data;
+
+        // Implement row filtering.
+        const filterInput = document.querySelector('#filter');
+        filterInput.addEventListener('value-changed', () => {
+          const filterText = filterInput.value.toLowerCase();
+          grid.items = filterText ?
+            data.filter(item => item.name.toLowerCase().includes(filterText)) :
+            data;
+        });
+
+        // Implement row sorting.
+        grid.addEventListener('sort-order-changed', () => {
+          const so = grid.sortOrder[0];
+          const prop = props[so.column];
+          var direction = so.direction == 'asc' ? -1 : 1;
+          grid.items.sort((a, b) => a[prop] < b[prop] ? direction : -direction);
+        });
+      },
+      _onSubmit() {
+        this.submitDialog.open();
+      }
+    });
+  </script>
+</dom-module>
