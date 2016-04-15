@@ -1,0 +1,16 @@
+{
+  "name": "polymer-ajax",
+  "version": "1.0.0",
+  "description": "demo of using Ajax in Polymer",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "R. Mark Volkmann",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1",
+    "express": "^4"
+  }
+}

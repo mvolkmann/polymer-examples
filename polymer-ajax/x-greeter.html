@@ -1,0 +1,42 @@
+<dom-module id="x-greeter">
+  <template>
+    <iron-ajax
+      auto
+      url="http://localhost:8081/name"
+      params="[[nameParams]]"
+      handle-as="json"
+      on-response="handleResponse"></iron-ajax>
+    <iron-ajax id="nameAjax"
+      url="http://localhost:8081/name"
+      params="[[nameParams2]]"
+      handle-as="json"
+      on-response="handleResponse"></iron-ajax>
+    <h1>Hello, [[name]]!</h1>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'x-greeter',
+      handleResponse(event) {
+        const res = event.detail.response;
+        this.name = res.name;
+      },
+      ready() {
+        // Set initial query parameters.
+        this.nameParams = {prefix: 'Mr.'};
+
+        // Trigger Ajax request by changing query parameters.
+        setTimeout(() => {
+          this.nameParams = {prefix: 'Ms.'};
+        }, 1000);
+
+        // Trigger Ajax request explicitly.
+        setTimeout(() => {
+          this.nameParams2 = {prefix: 'Silly'};
+          const ajax = this.$.nameAjax;
+          ajax.generateRequest();
+        }, 2000);
+      }
+    });
+  </script>
+</dom-module>
