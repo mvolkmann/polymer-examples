@@ -1,24 +1,24 @@
 <dom-module id="bordered-table">
-  <style is="custom-style">
-    :host {
-      border-collapse: collapse;
-    }
-    caption {
-      font-size: var(--table-caption-size, 18pt);
-      font-weight: bold;
-    }
-    ::content th {
-      background-color: var(--table-th-bg-color, yellow);
-    }
-    ::content td, ::content th {
-      border-style: solid;
-      border-color: var(--table-border-color, orange);
-      border-size: var(--table-border-size, 3px);
-      padding: 5px;
-    }
-  </style>
-
   <template>
+    <style is="custom-style">
+      :host {
+        border-collapse: collapse;
+      }
+      caption {
+        font-size: var(--table-caption-size, 18pt);
+        font-weight: bold;
+      }
+      ::content th {
+        background-color: var(--table-th-bg-color, yellow);
+      }
+      ::content td, ::content th {
+        border-style: solid;
+        border-color: var(--table-border-color, orange);
+        border-size: var(--table-border-size, 3px);
+        padding: 5px;
+      }
+    </style>
+
     <caption>[[caption]]</caption>
     <content></content>
   </template>

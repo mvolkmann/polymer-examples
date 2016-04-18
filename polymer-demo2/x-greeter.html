@@ -1,22 +1,22 @@
 <dom-module id="x-greeter">
-  <style>
-    :host {
-      background-color: linen;
-      border: solid red 3px;
-      display: block;
-      padding: 10px;
-      width: 250px;
-    }
-    h1 {
-      color: red;
-      margin: 0;
-    }
-    p {
-      margin-bottom: 0;
-    }
-  </style>
-
   <template>
+    <style>
+      :host {
+        background-color: linen;
+        border: solid red 3px;
+        display: block;
+        padding: 10px;
+        width: 250px;
+      }
+      h1 {
+        color: red;
+        margin: 0;
+      }
+      p {
+        margin-bottom: 0;
+      }
+    </style>
+
     <h1>Hello, <content></content>!</h1>
     <p>This is a second line of content.</p>
   </template>
