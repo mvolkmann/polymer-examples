@@ -38,7 +38,7 @@
       <input type="text" autofocus
         placeholder="enter new todo here"
         value="{{_todoText::input}}">
-      <button disabled="{{!_todoText}}" on-click="_addTodo">
+      <button disabled="[[!_todoText]]" on-click="_addTodo">
         Add
       </button>
     </form>
