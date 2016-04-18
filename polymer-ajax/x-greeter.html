@@ -5,22 +5,29 @@
       url="http://localhost:8081/name"
       params="[[nameParams]]"
       handle-as="json"
-      on-response="handleResponse"></iron-ajax>
+      last-response="{{res}}">
+      <!--on-response="handleResponse"-->
+    </iron-ajax>
     <iron-ajax id="nameAjax"
       url="http://localhost:8081/name"
       params="[[nameParams2]]"
       handle-as="json"
-      on-response="handleResponse"></iron-ajax>
-    <h1>Hello, [[name]]!</h1>
+      last-response="{{res}}">
+      <!--on-response="handleResponse"-->
+    </iron-ajax>
+    <!--h1>Hello, [[name]]!</h1-->
+    <h1>Hello, [[res.name]]!</h1>
   </template>
 
   <script>
     Polymer({
       is: 'x-greeter',
+      /*
       handleResponse(event) {
         const res = event.detail.response;
         this.name = res.name;
       },
+      */
       ready() {
         // Set initial query parameters.
         this.nameParams = {prefix: 'Mr.'};

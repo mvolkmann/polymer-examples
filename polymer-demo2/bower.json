@@ -1,9 +1,9 @@
 {
-  "name": "todo",
+  "name": "polymer-demo2",
   "authors": [
     "R. Mark Volkmann <r.mark.volkmann@gmail.com>"
   ],
-  "description": "Todo app in Polymer",
+  "description": "Polymer Demo #2",
   "main": "index.html",
   "moduleType": [],
   "license": "MIT",

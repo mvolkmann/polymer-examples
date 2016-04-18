@@ -1,9 +1,9 @@
 {
-  "name": "todo",
+  "name": "wc-class",
   "authors": [
     "R. Mark Volkmann <r.mark.volkmann@gmail.com>"
   ],
-  "description": "Todo app in Polymer",
+  "description": "Web Component class",
   "main": "index.html",
   "moduleType": [],
   "license": "MIT",
