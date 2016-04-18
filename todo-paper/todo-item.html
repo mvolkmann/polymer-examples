@@ -1,0 +1,32 @@
+<dom-module id="todo-item">
+  <template>
+    <style>
+      li {
+        margin-top: 5px;
+      }
+
+      .done-true {
+        color: gray;
+        text-decoration: line-through;
+      }
+    </style>
+
+    <li>
+      <paper-checkbox checked="{{todo.done}}">
+      <span class$="done-{{todo.done}}">{{todo.text}}</span>
+      <paper-button on-click="_deleteTodo">Delete</paper-button>
+    </li>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'todo-item',
+      properties: {
+        todo: Object
+      },
+      _deleteTodo() {
+        this.fire('delete-todo', this.todo.id);
+      }
+    });
+  </script>
+</dom-module>
