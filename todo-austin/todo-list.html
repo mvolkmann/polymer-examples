@@ -96,6 +96,7 @@
         this.todos = this.todos.filter(t => !t.done);
       },
       _getUncompletedCount(todos) {
+        console.log('todo-list.html _getUncompletedCount: entered');
         return todos.filter(todo => !todo.done).length;
       }
     });

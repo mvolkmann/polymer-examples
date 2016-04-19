@@ -28,7 +28,7 @@
 
     <h2>To Do List</h2>
     <div>
-      {{_getUncompletedCount()}} of {{_todos.length}} remaining
+      {{_uncompletedCount}} of {{_todos.length}} remaining
       <button on-click="_archiveCompleted">
         Archive Completed
       </button>
@@ -69,6 +69,12 @@
             createTodo('learn Polymer', true),
             createTodo('build a Polymer app')
           ]
+        },
+        _uncompletedCount: {
+          type: Number,
+          computed: '_getUncompletedCount(_todos, _todos.*)',
+          notify: true,
+          readOnly: true
         }
       },
       listeners: {
@@ -86,11 +92,9 @@
         const index = this._todos.findIndex(t => t.id === todoId);
         this.splice('_todos', index, 1);
       },
-      _getUncompletedCount() {
-        //TODO: Can you avoid verifying that this._todos is set?
-        return this._todos ?
-          this._todos.filter(todo => !todo.done).length :
-          0;
+      _getUncompletedCount(todos) {
+        console.log('todo-list.html _getUncompletedCount: entered');
+        return todos.filter(todo => !todo.done).length;
       }
     });
   </script>

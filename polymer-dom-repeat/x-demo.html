@@ -1,0 +1,30 @@
+<dom-module id="x-demo">
+  <template>
+    <h1>People List</h1>
+    <template is="dom-repeat" items="{{people}}" as="person"
+      filter="_personFilter"
+      sort="_personComparator">
+      <div>{{person.name}} is a {{person.profession}}.</div>
+    </template>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'x-demo',
+      _personFilter(person) {
+        return person.gender === 'F';
+      },
+      _personComparator(p1, p2) {
+        return p1.name.localeCompare(p2.name);
+      },
+      ready() {
+        this.people = [
+          {name: 'Mark', gender: 'M', profession: 'software developer'},
+          {name: 'Tami', gender: 'F', profession: 'vet receptionist'},
+          {name: 'Amanda', gender: 'F', profession: 'nurse'},
+          {name: 'Jeremy', gender: 'M', profession: 'systems administrator'}
+        ];
+      }
+    });
+  </script>
+</dom-module>
