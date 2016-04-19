@@ -1,0 +1,29 @@
+<script>
+  <!-- Watch out for namespacing issues! -->
+  TimestampBehavior = {
+    properties: {
+      timestampMs: {
+        type: Number,
+        value: Date.now(),
+        notify: true,
+        observer: 'alertTimestamp'
+      },
+      timestampDate: {
+        type: String,
+        computed: 'format(timestampMs)'
+      }
+    },
+    listeners: {
+      touch: 'touchTimestamp'
+    },
+    alertTimestamp() {
+      alert(this.timestampDate);
+    },
+    format(ms) {
+      return new Date(ms).toString();
+    },
+    touchTimestamp() {
+      this.timestampMs = Date.now();
+    }
+  };
+</script>

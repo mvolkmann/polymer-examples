@@ -1,0 +1,20 @@
+<link rel="import" href="./timestamp-behavior.html">
+
+<dom-module id="behavior-demo">
+  <template>
+    <h1>Behavior Demo</h1>
+    <div>Timestamp: {{timestampDate}}</div>
+    <button on-click="touchTimestamp">Touch</button>
+    <button on-click="fireTimestampTouch">Fire</button>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'behavior-demo',
+      behaviors: [TimestampBehavior],
+      fireTimestampTouch() {
+        this.fire('touch');
+      }
+    });
+  </script>
+</dom-module>
