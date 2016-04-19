@@ -1,7 +1,7 @@
 {
-  "name": "polymer-dom-repeat",
+  "name": "polymer-if-repeat",
   "version": "1.0.0",
-  "description": "Polymer dom-repeat",
+  "description": "Polymer dom-if and dom-repeat",
   "main": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

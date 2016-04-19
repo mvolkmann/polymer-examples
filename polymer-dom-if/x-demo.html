@@ -1,0 +1,30 @@
+<dom-module id="x-demo">
+  <template>
+    <!-- 1st approach -->
+    <div>
+      {{person.name}} is
+      <template is="dom-if" if="{{person.male}}">male</template>
+      <template is="dom-if" if="{{!person.male}}">female</template>
+    </div>
+    <!-- 2nd approach -->
+    <div>{{_msg}}</div>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'x-demo',
+      properties: {
+        _msg: {
+          type: String,
+          computed: '_getMsg(person)'
+        }
+      },
+      ready() {
+        this.person = {name: 'Mark', male: true};
+      },
+      _getMsg(person) {
+        return `${person.name} is ${person.male ? 'male' : 'female'}`;
+      }
+    });
+  </script>
+</dom-module>

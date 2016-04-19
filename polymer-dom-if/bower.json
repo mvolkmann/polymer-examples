@@ -1,9 +1,9 @@
 {
-  "name": "polymer-dom-repeat",
+  "name": "polymer-dom-if",
   "authors": [
     "R. Mark Volkmann <r.mark.volkmann@gmail.com>"
   ],
-  "description": "Polymer dom-repeat",
+  "description": "Polymer dom-if",
   "main": "index.html",
   "moduleType": [],
   "license": "MIT",
