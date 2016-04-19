@@ -44,7 +44,7 @@
     </form>
     <ul>
       <template is="dom-repeat" items="{{_todos}}" as="todo">
-      <todo-item todo="[[todo]]"></todo-item>
+      <todo-item todo="{{todo}}"></todo-item>
       </template>
     </ul>
   </template>
@@ -93,7 +93,6 @@
         this.splice('_todos', index, 1);
       },
       _getUncompletedCount(todos) {
-        console.log('todo-list.html _getUncompletedCount: entered');
         return todos.filter(todo => !todo.done).length;
       }
     });

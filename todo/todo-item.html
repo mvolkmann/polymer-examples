@@ -15,8 +15,8 @@
       }
     </style>
 
-    <li id="foo">
-      <input id="bar" type="checkbox" checked="{{todo.done}}" on-click="_toggleDone">
+    <li>
+      <input type="checkbox" checked="{{todo.done}}" on-click="_toggleDone">
       <span class$="done-{{todo.done}}">{{todo.text}}</span>
       <button on-click="_deleteTodo">Delete</button>
     </li>
