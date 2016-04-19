@@ -1,4 +1,4 @@
 Steps to run
 - bower install
-- npm start
-- browse localhost:8081
+- polyserve
+- browse localhost:8080
