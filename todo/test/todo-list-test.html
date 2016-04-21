@@ -39,10 +39,10 @@
 
         test('can archive completed todos', () => {
           el._archiveCompleted();
-          //TODO: Why is the todo from the previous test present here?
           assert.equal(el.todos.length, 2);
           const [t1, t2] = el.todos;
           assert.equal(t1.text, 'build a Polymer app');
+          //TODO: Why is the todo from the previous test present here?
           assert.equal(t2.text, 'foo');
         });
 
