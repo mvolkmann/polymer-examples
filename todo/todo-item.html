@@ -28,7 +28,10 @@
     Polymer({
       is: 'todo-item',
       properties: {
-        todo: Object
+        todo: {
+          type: Object,
+          notify: true
+        }
       },
       _deleteTodo() {
         this.fire('delete-todo', this.todo.id);
