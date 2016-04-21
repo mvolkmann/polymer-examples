@@ -29,8 +29,8 @@
 
     <h2>To Do List</h2>
     <div>
-      [[_uncompletedCount]] of
-      [[_todos.length]] remaining
+      [[uncompletedCount]] of
+      [[todos.length]] remaining
       <button on-click="_archiveCompleted">
         Archive Completed
       </button>
@@ -39,13 +39,13 @@
     <form>
       <input type="text" autofocus
         placeholder="enter new todo here"
-        value="{{_todoText::input}}">
-      <button disabled="[[!_todoText]]" on-click="_addTodo">
+        value="{{todoText::input}}">
+      <button disabled="[[!todoText]]" on-click="_addTodo">
         Add
       </button>
     </form>
     <ul>
-      <template is="dom-repeat" items="[[_todos]]" as="todo">
+      <template is="dom-repeat" items="[[todos]]" as="todo">
         <todo-item todo="{{todo}}"></todo-item>
       </template>
     </ul>
@@ -61,20 +61,20 @@
     Polymer({
       is: 'todo-list',
       properties: {
-        _todoText: {
+        todoText: {
           type: String,
           value: ''
         },
-        _todos: {
+        todos: {
           type: Array,
           value: [
             createTodo('learn Polymer', true),
             createTodo('build a Polymer app')
           ]
         },
-        _uncompletedCount: {
+        uncompletedCount: {
           type: Number,
-          computed: '_getUncompletedCount(_todos, _todos.*)',
+          computed: '_getUncompletedCount(todos, todos.*)',
           notify: true,
           readOnly: true
         }
@@ -83,16 +83,16 @@
         'delete-todo': '_deleteTodo'
       },
       _addTodo() {
-        this.push('_todos', createTodo(this._todoText));
-        this._todoText = '';
+        this.push('todos', createTodo(this.todoText));
+        this.todoText = '';
       },
       _archiveCompleted() {
-        this.set('_todos', this._todos.filter(t => !t.done));
+        this.set('todos', this.todos.filter(t => !t.done));
       },
       _deleteTodo(event) {
         const todoId = event.detail;
-        const index = this._todos.findIndex(t => t.id === todoId);
-        this.splice('_todos', index, 1);
+        const index = this.todos.findIndex(t => t.id === todoId);
+        this.splice('todos', index, 1);
       },
       _getUncompletedCount(todos) {
         console.log('todo-list.html _getUncompletedCount: entered');
