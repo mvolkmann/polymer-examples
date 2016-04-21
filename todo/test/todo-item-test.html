@@ -30,6 +30,8 @@
         test('toggles', () => {
           el._toggleDone();
           assert.equal(el.todo.done, true);
+          el._toggleDone();
+          assert.equal(el.todo.done, false);
         });
 
         test('deletes', done => {

@@ -20,8 +20,8 @@
         });
 
         test('initializes', () => {
-          assert.equal(el._todos.length, 2);
-          const [t1, t2] = el._todos;
+          assert.equal(el.todos.length, 2);
+          const [t1, t2] = el.todos;
           assert.equal(t1.text, 'learn Polymer');
           assert(t1.done);
           assert.equal(t2.text, 'build a Polymer app');
@@ -29,18 +29,19 @@
         });
 
         test('can add a todo', () => {
-          el._todoText = 'foo';
+          el.todoText = 'foo';
           el._addTodo();
-          assert.equal(el._todos.length, 3);
-          const [, , t3] = el._todos;
+          assert.equal(el.todos.length, 3);
+          const [, , t3] = el.todos;
           assert.equal(t3.text, 'foo');
           assert(!t3.done);
         });
 
         test('can archive completed todos', () => {
           el._archiveCompleted();
-          assert.equal(el._todos.length, 2);
-          const [t1, t2] = el._todos;
+          //TODO: Why is the todo from the previous test present here?
+          assert.equal(el.todos.length, 2);
+          const [t1, t2] = el.todos;
           assert.equal(t1.text, 'build a Polymer app');
           assert.equal(t2.text, 'foo');
         });
@@ -48,12 +49,12 @@
         // This test fails when run with other tests.  Why?
         /*
         test('can delete a todo', done => {
-          assert.equal(el._todos.length, 2); // fails
+          assert.equal(el.todos.length, 2); // fails
           const event = {detail: 1}; // id of "learn Polymer"
           el._deleteTodo(event);
           flush(() => {
-            assert.equal(el._todos.length, 1);
-            const [t2] = el._todos;
+            assert.equal(el.todos.length, 1);
+            const [t2] = el.todos;
             assert.equal(t2.text, 'build a Polymer app');
             done();
           });
