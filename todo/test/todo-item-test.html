@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../bower_components/web-component-tester/browser.js"></script>
+    <link rel="import" href="../todo-item.html">
+  </head>
+  <body>
+    <test-fixture id="todo-item-fixture">
+      <template>
+        <todo-item></todo-item>
+      </template>
+    </test-fixture>
+    <script>
+      suite('<todo-item>', () => {
+        let el;
+        const todo = {id: 7, text: 'Cut grass'};
+
+        setup(() => {
+          el = fixture('todo-item-fixture');
+          el.todo = todo;
+        });
+
+        test('initializes', () => {
+          assert.equal(el.todo.done, undefined);
+          assert.equal(el.todo.id, todo.id);
+          assert.equal(el.todo.text, todo.text);
+        });
+
+        test('toggles', () => {
+          el._toggleDone();
+          assert.equal(el.todo.done, true);
+        });
+
+        test('deletes', done => {
+          el.addEventListener('delete-todo', event => {
+            assert.equal(event.detail, todo.id);
+            done();
+          });
+          el._deleteTodo();
+        });
+      });
+    </script>
+  </body>
+</html>

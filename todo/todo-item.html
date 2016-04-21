@@ -1,6 +1,8 @@
+<link rel="import" href="./bower_components/polymer/polymer.html">
+
 <dom-module id="todo-item">
   <template>
-    <style>
+    <style is="custom-style">
       button {
         @apply(--button-style);
       }
@@ -16,8 +18,8 @@
     </style>
 
     <li>
-      <input type="checkbox" checked="{{todo.done}}" on-click="_toggleDone">
-      <span class$="done-{{todo.done}}">{{todo.text}}</span>
+      <input type="checkbox" checked="[[todo.done]]" on-click="_toggleDone">
+      <span class$="done-[[todo.done]]">[[todo.text]]</span>
       <button on-click="_deleteTodo">Delete</button>
     </li>
   </template>
@@ -33,6 +35,7 @@
       },
       _toggleDone() {
         this.set('todo.done', !this.todo.done);
+        console.log('todo-item.html _toggleDone: this.todo =', this.todo);
       }
     });
   </script>

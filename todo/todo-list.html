@@ -1,8 +1,9 @@
+<link rel="import" href="./bower_components/polymer/polymer.html">
 <link rel="import" href="./todo-item.html">
 
 <dom-module id="todo-list">
   <template>
-    <style>
+    <style is="custom-style">
       :host {
         /* To propagate styles into descendant components, use CSS mixins. */
         --button-style: {
@@ -28,7 +29,8 @@
 
     <h2>To Do List</h2>
     <div>
-      {{_uncompletedCount}} of {{_todos.length}} remaining
+      [[_uncompletedCount]] of
+      [[_todos.length]] remaining
       <button on-click="_archiveCompleted">
         Archive Completed
       </button>
@@ -43,8 +45,8 @@
       </button>
     </form>
     <ul>
-      <template is="dom-repeat" items="{{_todos}}" as="todo">
-      <todo-item todo="{{todo}}"></todo-item>
+      <template is="dom-repeat" items="[[_todos]]" as="todo">
+        <todo-item todo="{{todo}}"></todo-item>
       </template>
     </ul>
   </template>
@@ -85,7 +87,7 @@
         this._todoText = '';
       },
       _archiveCompleted() {
-        this._todos = this._todos.filter(t => !t.done);
+        this.set('_todos', this._todos.filter(t => !t.done));
       },
       _deleteTodo(event) {
         const todoId = event.detail;
@@ -93,6 +95,7 @@
         this.splice('_todos', index, 1);
       },
       _getUncompletedCount(todos) {
+        console.log('todo-list.html _getUncompletedCount: entered');
         return todos.filter(todo => !todo.done).length;
       }
     });
