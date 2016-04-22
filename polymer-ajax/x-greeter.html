@@ -5,7 +5,8 @@
       url="http://localhost:8081/name"
       params="[[nameParams]]"
       handle-as="json"
-      last-response="{{res}}">
+      last-response="{{res}}"
+      on-error="handleError">
       <!--on-response="handleResponse"-->
     </iron-ajax>
     <iron-ajax id="nameAjax"
@@ -22,12 +23,15 @@
   <script>
     Polymer({
       is: 'x-greeter',
-      /*
+      handleError(event) {
+        const err = event.detail.error;
+        console.log('x-greeter.html handleError: event =', event);
+        console.log('x-greeter.html handleError: err =', err);
+      },
       handleResponse(event) {
         const res = event.detail.response;
         this.name = res.name;
       },
-      */
       ready() {
         // Set initial query parameters.
         this.nameParams = {prefix: 'Mr.'};

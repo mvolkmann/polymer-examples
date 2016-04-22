@@ -19,6 +19,7 @@ app.get('/name', (req, res) => {
   if (index === names.length) index = 0;
 
   res.send(obj);
+  //res.status(500).send(obj);
 });
 
 const PORT = 8081;
