@@ -26,10 +26,14 @@
           value: false,
           observer: '_setAgreeMsg'
         },
+        agreeMsg: {
+          type: String,
+          computed: '_getAgreeMsg(agree)'
+        },
         name: String
       },
-      _setAgreeMsg() {
-        this.agreeMsg = `You ${this.agree ? 'agree' : 'disagree'}.`;
+      _getAgreeMsg(agree) {
+        return `You ${this.agree ? 'agree' : 'disagree'}.`;
       }
     });
   </script>
