@@ -2,8 +2,8 @@
 <html>
   <head>
     <title>CSS Variables</title>
-    <script src="webcomponents.js"></script>
-    <link rel="import" href="./bower_components/polymer/polymer.html">
+    <script src="../webcomponentsjs/webcomponents-lite.min.js"></script>
+    <link rel="import" href="../polymer/polymer.html">
 
     <link rel="import" href="./theme.html">
 
@@ -31,7 +31,7 @@
       .section1 {
         border: solid red 1px;
         height: var(--my-total-height);
-        --my-error-color: green;
+        --my-error-color: green; /*TODO: not working! */
         --my-font-size: 24px;
       }
 

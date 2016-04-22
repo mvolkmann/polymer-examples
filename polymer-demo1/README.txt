@@ -1,12 +1,11 @@
 Steps to run
 - npm install
 - bower install
-- npm start
-- browse localhost:8081
+- polyserve -o
 
 To generate vulcanized version
 - ./vulcanize.sh
 - generates index.v.html and app.js
 
 To browse vulcanized version
-- browse localhost:8081/index.v.html
+- browse localhost:8080/index.v.html

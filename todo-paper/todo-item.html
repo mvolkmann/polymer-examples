@@ -1,3 +1,7 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../paper-checkbox/paper-checkbox.html">
+
 <dom-module id="todo-item">
   <template>
     <style>
@@ -13,7 +17,7 @@
 
     <li>
       <paper-checkbox checked="{{todo.done}}">
-      <span class$="done-{{todo.done}}">{{todo.text}}</span>
+      <span class$="done-[[todo.done]]">[[todo.text]]</span>
       <paper-button on-click="_deleteTodo">Delete</paper-button>
     </li>
   </template>
@@ -22,7 +26,10 @@
     Polymer({
       is: 'todo-item',
       properties: {
-        todo: Object
+        todo: {
+          type: Object,
+          notify: true
+        }
       },
       _deleteTodo() {
         this.fire('delete-todo', this.todo.id);

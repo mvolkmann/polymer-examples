@@ -13,7 +13,7 @@ XGreeter.createdCallback = function () { // can't use an arrow function
 
 document.registerElement('x-greeter', {prototype: XGreeter});
 
-//TODO: Why doesn't this work?
+//TODO: Why doesn't this approach work?
 const XHello = document.registerElement('x-hello');
 XHello.createdCallback = function () { // can't use an arrow function
   //TODO: This is never called!  Why?

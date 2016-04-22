@@ -1,0 +1,34 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-flex-layout/iron-flex-layout-classes.html">
+
+<dom-module id="flexbox-demo">
+  <template>
+    <style include="iron-flex">
+      :host {
+        background-color: linen;
+        border: solid red 3px;
+        display: block;
+        padding: 10px;
+        width: 250px;
+      }
+
+      .stooge {
+        border: solid blue 1px;
+        color: blue;
+        padding: 5px;
+      }
+    </style>
+
+    <div class="layout horizontal">
+      <div class="stooge">Moe</div>
+      <div class="stooge">Larry</div>
+      <div class="stooge">Curly</div>
+    </div>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'flexbox-demo'
+    });
+  </script>
+</dom-module>

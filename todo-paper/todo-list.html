@@ -1,3 +1,6 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../paper-input/paper-input.html">
 <link rel="import" href="./todo-item.html">
 
 <dom-module id="todo-list">
@@ -12,7 +15,8 @@
 
     <h2>To Do List</h2>
     <div>
-      {{_getUncompletedCount()}} of {{_todos.length}} remaining
+      [[uncompletedCount]] of
+      [[todos.length]] remaining
       <paper-button on-click="_archiveCompleted">
         Archive Completed
       </paper-button>
@@ -20,15 +24,15 @@
     <br/>
     <paper-input autofocus
       label="enter new todo here"
-      value="{{_todoText}}"
-      on-keypress="_todoTextKeyPress">
+      value="{{todoText}}"
+      on-keypress="todoTextKeyPress">
     </paper-input>
-    <paper-button disabled="[[!_todoText]]" on-click="_addTodo">
+    <paper-button disabled="[[!todoText]]" on-click="_addTodo">
       Add
     </paper-button>
     <ul>
-      <template is="dom-repeat" items="{{_todos}}" as="todo">
-        <todo-item todo="[[todo]]"></todo-item>
+      <template is="dom-repeat" items="{{todos}}" as="todo">
+        <todo-item todo="{{todo}}"></todo-item>
       </template>
     </ul>
   </template>
@@ -43,40 +47,43 @@
     Polymer({
       is: 'todo-list',
       properties: {
-        _todoText: {
+        todoText: {
           type: String,
           value: ''
         },
-        _todos: {
+        todos: {
           type: Array,
           value: [
             createTodo('learn Polymer', true),
             createTodo('build a Polymer app')
           ]
+        },
+        uncompletedCount: {
+          type: Number,
+          computed: '_getUncompletedCount(todos, todos.*)',
+          notify: true,
+          readOnly: true
         }
       },
       listeners: {
         'delete-todo': '_deleteTodo'
       },
       _addTodo() {
-        this.push('_todos', createTodo(this._todoText));
-        this._todoText = '';
+        this.push('todos', createTodo(this.todoText));
+        this.todoText = '';
       },
       _archiveCompleted() {
-        this._todos = this._todos.filter(t => !t.done);
+        this.todos = this.todos.filter(t => !t.done);
       },
       _deleteTodo(event) {
         const todoId = event.detail;
-        const index = this._todos.findIndex(t => t.id === todoId);
-        this.splice('_todos', index, 1);
+        const index = this.todos.findIndex(t => t.id === todoId);
+        this.splice('todos', index, 1);
       },
-      _getUncompletedCount() {
-        //TODO: Can you avoid verifying that this._todos is set?
-        return this._todos ?
-          this._todos.filter(todo => !todo.done).length :
-          0;
+      _getUncompletedCount(todos) {
+        return todos.filter(todo => !todo.done).length;
       },
-      _todoTextKeyPress(event) {
+      todoTextKeyPress(event) {
         const gotReturn = event.which === 13;
         if (gotReturn) this._addTodo();
       }
