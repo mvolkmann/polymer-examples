@@ -1,4 +1,4 @@
-<link rel="import" href="./bower_components/polymer/polymer.html">
+<link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="./todo-item.html">
 
 <dom-module id="todo-list">
@@ -95,7 +95,6 @@
         this.splice('todos', index, 1);
       },
       _getUncompletedCount(todos) {
-        console.log('todo-list.html _getUncompletedCount: entered');
         return todos.filter(todo => !todo.done).length;
       }
     });
