@@ -16,6 +16,7 @@
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "iron-demo-helpers": "^1.2.3",
     "web-component-tester": "^4.0.0"
   }
 }
