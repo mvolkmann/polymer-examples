@@ -30,7 +30,19 @@
   <script>
     Polymer({
       is: 'x-greeter',
-      properties: {name: String}
+      properties: {name: String},
+      /*
+      ready() {
+        // Dump names of methods or properties on "this".
+        const names = [];
+        for (const prop in this) {
+          const value = this[prop];
+          if (prop.charAt(0) !== '_' && typeof value === 'function') names.push(prop);
+          //if (prop.charAt(0) !== '_' && typeof value !== 'function') names.push(prop);
+        }
+        names.sort().forEach(prop => console.log(prop));
+      }
+      */
     });
   </script>
 </dom-module>
