@@ -95,7 +95,6 @@
         this.splice('todos', index, 1);
       },
       _getUncompletedCount(todos, foo) {
-        console.log('todo-list.html guc: foo =', foo);
         return todos.filter(todo => !todo.done).length;
       }
     });
