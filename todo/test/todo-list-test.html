@@ -21,7 +21,6 @@
         });
 
         test('initializes', () => {
-          console.log('todo-list-test.html t1: el.todos =', el.todos);
           assert.equal(el.todos.length, 2);
           const [t1, t2] = el.todos;
           assert.equal(t1.text, 'learn Polymer');
@@ -31,7 +30,6 @@
         });
 
         test('can add a todo', () => {
-          console.log('todo-list-test.html t2: el.todos =', el.todos);
           el.todoText = 'foo';
           el._addTodo();
           assert.equal(el.todos.length, 3);
@@ -41,7 +39,6 @@
         });
 
         test('can archive completed todos', () => {
-          console.log('todo-list-test.html t3: el.todos =', el.todos);
           el._archiveCompleted();
           assert.equal(el.todos.length, 1);
           const [t1] = el.todos;
@@ -49,14 +46,13 @@
         });
 
         test('can delete a todo', done => {
-          console.log('todo-list-test.html t4: el.todos =', el.todos);
           assert.equal(el.todos.length, 2);
           const event = {detail: 1}; // id of "learn Polymer"
           el._deleteTodo(event);
           flush(() => {
             assert.equal(el.todos.length, 1);
-            const [t2] = el.todos;
-            assert.equal(t2.text, 'build a Polymer app');
+            const [t1] = el.todos;
+            assert.equal(t1.text, 'build a Polymer app');
             done();
           });
         });

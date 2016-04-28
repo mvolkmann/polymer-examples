@@ -4,18 +4,19 @@
   <template>
     <!-- 1st approach -->
     <div>
-      {{person.name}} is
-      <template is="dom-if" if="{{person.male}}">male</template>
-      <template is="dom-if" if="{{!person.male}}">female</template>
+      [[person.name]] is
+      <template is="dom-if" if="[[person.male]]">male</template>
+      <template is="dom-if" if="[[!person.male]]">female</template>
     </div>
     <!-- 2nd approach -->
-    <div>{{_msg}}</div>
+    <div>[[_msg]]</div>
   </template>
 
   <script>
     Polymer({
       is: 'x-demo',
       properties: {
+        person: Object,
         _msg: {
           type: String,
           computed: '_getMsg(person)'

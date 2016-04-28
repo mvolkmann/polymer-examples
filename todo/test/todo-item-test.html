@@ -27,13 +27,6 @@
           assert.equal(el.todo.text, todo.text);
         });
 
-        test('toggles', () => {
-          el._toggleDone();
-          assert.equal(el.todo.done, true);
-          el._toggleDone();
-          assert.equal(el.todo.done, false);
-        });
-
         test('deletes', done => {
           el.addEventListener('delete-todo', event => {
             assert.equal(event.detail, todo.id);

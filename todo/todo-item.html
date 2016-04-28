@@ -18,7 +18,7 @@
     </style>
 
     <li>
-      <input type="checkbox" checked="[[todo.done]]" on-click="_toggleDone">
+      <input type="checkbox" checked="{{todo.done::change}}">
       <span class$="done-[[todo.done]]">[[todo.text]]</span>
       <button on-click="_deleteTodo">Delete</button>
     </li>
@@ -35,9 +35,6 @@
       },
       _deleteTodo() {
         this.fire('delete-todo', this.todo.id);
-      },
-      _toggleDone() {
-        this.set('todo.done', !this.todo.done);
       }
     });
   </script>
