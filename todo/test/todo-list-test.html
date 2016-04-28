@@ -12,7 +12,7 @@
       </template>
     </test-fixture>
     <script>
-      suite('<todo-list> suite 1', () => {
+      suite('<todo-list>', () => {
         let el;
 
         setup(() => {
@@ -39,15 +39,6 @@
           assert.equal(t3.text, 'foo');
           assert(!t3.done);
         });
-      });
-
-      suite('<todo-list> suite 2', () => {
-        let el;
-
-        setup(() => {
-          console.log('todo-list-test.html setup: entered');
-          el = fixture('my-fixture');
-        });
 
         test('can archive completed todos', () => {
           console.log('todo-list-test.html t3: el.todos =', el.todos);
@@ -57,7 +48,6 @@
           assert.equal(t1.text, 'build a Polymer app');
         });
 
-        /*
         test('can delete a todo', done => {
           console.log('todo-list-test.html t4: el.todos =', el.todos);
           assert.equal(el.todos.length, 2);
@@ -70,7 +60,6 @@
             done();
           });
         });
-        */
       });
     </script>
   </body>

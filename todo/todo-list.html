@@ -27,7 +27,7 @@
       }
     </style>
 
-    <h2>To Do List</h2>
+    <h2 id="foo">To Do List</h2>
     <div>
       [[uncompletedCount]] of
       [[todos.length]] remaining
@@ -58,6 +58,13 @@
       return {id: ++lastId, text, done};
     }
 
+    function getInitialTodos() {
+      return [
+        createTodo('learn Polymer', true),
+        createTodo('build a Polymer app')
+      ];
+    }
+
     Polymer({
       is: 'todo-list',
       properties: {
@@ -67,10 +74,7 @@
         },
         todos: {
           type: Array,
-          value: [
-            createTodo('learn Polymer', true),
-            createTodo('build a Polymer app')
-          ]
+          value: getInitialTodos()
         },
         uncompletedCount: {
           type: Number,
@@ -82,6 +86,22 @@
       listeners: {
         'delete-todo': '_deleteTodo'
       },
+      /*
+      ready() {
+        console.log('foo =', this.$.foo);
+        this.dumpProps(this.$.foo);
+        const pn = Polymer.dom(this.$.foo);
+        this.dumpProps(pn);
+      },
+      dumpProps(obj) {
+        const names = [];
+        for (const prop in obj) {
+          const value = obj[prop];
+          if (typeof value === 'function') names.push(prop);
+        }
+        console.log(names.sort());
+      },
+      */
       _addTodo() {
         this.push('todos', createTodo(this.todoText));
         this.todoText = '';
