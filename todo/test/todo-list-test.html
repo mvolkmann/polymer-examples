@@ -16,7 +16,6 @@
         let el;
 
         setup(() => {
-          console.log('todo-list-test.html setup: entered');
           el = fixture('my-fixture');
         });
 
@@ -47,8 +46,12 @@
 
         test('can delete a todo', done => {
           assert.equal(el.todos.length, 2);
-          const event = {detail: 1}; // id of "learn Polymer"
+
+          // Delete the first todo.
+          const [t1] = el.todos;
+          const event = {detail: t1.id};
           el._deleteTodo(event);
+
           flush(() => {
             assert.equal(el.todos.length, 1);
             const [t1] = el.todos;
