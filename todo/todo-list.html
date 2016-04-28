@@ -58,13 +58,6 @@
       return {id: ++lastId, text, done};
     }
 
-    function getInitialTodos() {
-      return [
-        createTodo('learn Polymer', true),
-        createTodo('build a Polymer app')
-      ];
-    }
-
     Polymer({
       is: 'todo-list',
       properties: {
@@ -74,7 +67,10 @@
         },
         todos: {
           type: Array,
-          value: getInitialTodos()
+          value: () => [
+            createTodo('learn Polymer', true),
+            createTodo('build a Polymer app')
+          ]
         },
         uncompletedCount: {
           type: Number,

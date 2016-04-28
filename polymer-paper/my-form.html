@@ -54,7 +54,7 @@
         <div>
           <paper-checkbox checked="{{hungry}}"></paper-checkbox>
           <label>Hungry?</label>
-          <template is="dom-if" if="{{hungry}}">Have a Snickers.</template>
+          <template is="dom-if" if="[[hungry]]">Have a Snickers.</template>
         </div>
 
         <div>
@@ -64,7 +64,7 @@
             <paper-radio-button name="c">Chocolate</paper-radio-button>
             <paper-radio-button name="s">Strawberry</paper-radio-button>
           </paper-radio-group>
-          flavor = {{flavor}}
+          flavor = [[flavor]]
         </div>
 
         <paper-date-picker date="April 16, 1961"></paper-date-picker>
@@ -72,7 +72,7 @@
         <div>
           <vaadin-date-picker label="Birthday" value="{{birthday}}">
           </vaadin-date-picker>
-          Your birthday is {{birthday}}.
+          Your birthday is [[birthday]].
         </div>
 
         <paper-input id="filter" label="Filter by name"></paper-input>
