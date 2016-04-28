@@ -6,7 +6,7 @@
     <link rel="import" href="../todo-list.html">
   </head>
   <body>
-    <test-fixture id="my-fixture">
+    <test-fixture id="todo-list-fixture">
       <template>
         <todo-list></todo-list>
       </template>
@@ -16,7 +16,7 @@
         let el;
 
         setup(() => {
-          el = fixture('my-fixture');
+          el = fixture('todo-list-fixture');
         });
 
         test('initializes', () => {
