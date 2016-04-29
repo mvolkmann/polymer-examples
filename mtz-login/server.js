@@ -31,8 +31,8 @@ const GOOD_STATUS = 200;
 const BAD_STATUS = 422;
 
 app.post('/login', (req, res) => {
-  const {userName, password} = req.body;
-  const user = userMap[userName];
+  const {username, password} = req.body;
+  const user = userMap[username];
 
   let payload, status;
 
@@ -54,7 +54,10 @@ app.post('/login', (req, res) => {
 });
 
 app.post('/logout', (req, res) => {
+  const username = req.query.username;
+  console.log('got logout of', username);
   res.send();
+  //res.status(BAD_STATUS).send(); // for testing errors
 });
 
 app.listen(8081, () => console.log('ready'));

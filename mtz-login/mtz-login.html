@@ -43,7 +43,7 @@
 
     <iron-label>
       <div class="label-text">User Name</div>
-      <paper-input no-label-float no-autocomplete value="{{userName}}"/>
+      <paper-input no-label-float no-autocomplete value="{{username}}"/>
     </iron-label>
     <iron-label>
       <div class="label-text">Password</div>
@@ -70,7 +70,7 @@
         requestBody: {
           type: Object
         },
-        userName: {
+        username: {
           type: String,
           value: ''
         }
@@ -81,13 +81,14 @@
       handleResponse(event) {
         const token = event.detail.response;
         console.log('mtz-login.html handleResponse: token =', token);
+        sessionStorage.username = this.username;
         this.message = '';
       },
       login() {
-        console.log('mtz-login.html login: this.userName =', this.userName);
+        console.log('mtz-login.html login: this.username =', this.username);
         console.log('mtz-login.html login: this.password =', this.password);
         this.requestBody = {
-          userName: this.userName,
+          username: this.username,
           password: this.password
         }
         this.$.ajax.generateRequest();
