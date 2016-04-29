@@ -80,7 +80,7 @@
       },
       handleResponse(event) {
         const token = event.detail.response;
-        console.log('mtz-login.html handleResponse: token =', token);
+        sessionStorage.token = token;
         sessionStorage.username = this.username;
         this.message = '';
       },
@@ -89,7 +89,7 @@
         console.log('mtz-login.html login: this.password =', this.password);
         this.requestBody = {
           username: this.username,
-          password: this.password
+          password: this.password //TODO: HASH THIS!
         }
         this.$.ajax.generateRequest();
       }
