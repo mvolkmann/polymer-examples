@@ -1,0 +1,17 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="./mtz-login.html">
+<link rel="import" href="./mtz-logout-behavior.html">
+
+<dom-module id="demo-login-page">
+  <template>
+    <mtz-login></mtz-login>
+    <paper-button raised on-click="logout">Logout</paper-button>
+  </template>
+  <script>
+    Polymer({
+      is: 'demo-login-page',
+      behaviors: [MtzLogoutBehavior]
+    });
+  </script>
+</dom-module>

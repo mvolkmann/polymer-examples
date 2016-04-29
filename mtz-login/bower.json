@@ -1,0 +1,29 @@
+{
+  "name": "todo",
+  "authors": [
+    "R. Mark Volkmann <r.mark.volkmann@gmail.com>"
+  ],
+  "description": "Todo app in Polymer",
+  "main": "index.html",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1",
+    "iron-ajax": "PolymerElements/iron-ajax#^1.2.0",
+    "paper-input": "PolymerElements/paper-input#^1.1.11",
+    "iron-label": "PolymerElements/iron-label#^1.0.2",
+    "paper-button": "PolymerElements/paper-button#^1.0.11"
+  },
+  "devDependencies": {
+    "web-component-tester": "^4"
+  }
+}

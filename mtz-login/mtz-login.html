@@ -1,0 +1,97 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-ajax/iron-ajax.html">
+<link rel="import" href="../iron-label/iron-label.html">
+<link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../paper-input/paper-input.html">
+
+<dom-module id="mtz-login">
+  <template>
+    <style is="custom-style">
+      :host {
+      }
+
+      .label-text {
+        display: inline-block;
+        margin-right: 10px;
+        text-align: right;
+        width: 90px;
+      }
+
+      iron-label {
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      paper-button {
+        margin-left: 0;
+      }
+
+      paper-input {
+        display: inline-block;
+      }
+    </style>
+
+    <iron-ajax id="ajax"
+      url="http://localhost:8081/login"
+      method="POST"
+      body="{{requestBody}}"
+      handle-as="text"
+      headers='{"Content-Type": "application/json"}'
+      on-error="handleError"
+      on-response="handleResponse">
+    </iron-ajax>
+
+    <iron-label>
+      <div class="label-text">User Name</div>
+      <paper-input no-label-float no-autocomplete value="{{userName}}"/>
+    </iron-label>
+    <iron-label>
+      <div class="label-text">Password</div>
+      <paper-input no-label-float value="{{password}}" type="password"/>
+    </iron-label>
+    <iron-label>
+      <div class="label-text"></div>
+      <paper-button raised on-click="login">Login</paper-button>
+    </iron-label>
+    <div>[[message]]</div>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'mtz-login',
+      properties: {
+        message: {
+          type: String
+        },
+        password: {
+          type: String,
+          value: ''
+        },
+        requestBody: {
+          type: Object
+        },
+        userName: {
+          type: String,
+          value: ''
+        }
+      },
+      handleError(event) {
+        this.message = event.detail.request.xhr.responseText;
+      },
+      handleResponse(event) {
+        const token = event.detail.response;
+        console.log('mtz-login.html handleResponse: token =', token);
+        this.message = '';
+      },
+      login() {
+        console.log('mtz-login.html login: this.userName =', this.userName);
+        console.log('mtz-login.html login: this.password =', this.password);
+        this.requestBody = {
+          userName: this.userName,
+          password: this.password
+        }
+        this.$.ajax.generateRequest();
+      }
+    });
+  </script>
+</dom-module>

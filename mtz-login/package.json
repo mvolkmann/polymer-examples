@@ -1,0 +1,17 @@
+{
+  "name": "mtz-login",
+  "version": "1.0.0",
+  "description": "Maritz login polymer custom element",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "R. Mark Volkmann",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1",
+    "cors": "^2.7.1",
+    "express": "^4"
+  }
+}
