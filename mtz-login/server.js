@@ -31,6 +31,7 @@ function getToken() {
 
 const GOOD_STATUS = 200;
 const BAD_STATUS = 422;
+const UNAUTHORIZED = 401;
 
 app.post('/rest/login', (req, res) => {
   const {username, password} = req.body;
@@ -39,16 +40,30 @@ app.post('/rest/login', (req, res) => {
   let payload, status;
 
   if (!user) {
-    status = BAD_STATUS;
+    status = UNAUTHORIZED;
     payload = 'invalid user name or password';
   } else if (user.locked) {
     status = BAD_STATUS;
-    payload = 'account is locked';
+    payload = {
+      locked: true
+    };
   } else if (user.password === password) {
     status = GOOD_STATUS;
-    payload = getToken();
+    payload = {
+      attributes: {
+        authToken: getToken()
+      },
+      events: [],
+      impersonated: false,
+      locked: false,
+      pax: {
+        paxId: 1
+      },
+      roles: [],
+      userName: 'TID:000000'
+    };
   } else {
-    status = BAD_STATUS;
+    status = UNAUTHORIZED;
     payload = 'invalid user name or password';
   }
 

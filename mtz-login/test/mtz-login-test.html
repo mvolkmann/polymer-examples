@@ -38,7 +38,6 @@
             });
         });
 
-        /*
         test('bad username/password', done => {
           el.username = 'foo';
           el.password = 'bar';
@@ -50,11 +49,10 @@
               done();
             },
             err => {
-              console.error('mtz-login-test.html can login: err =', err);
+              console.log('mtz-login-test.html can login: err =', err);
               done();
             });
         });
-        */
 
         test('account locked', done => {
           el.username = 'mvolkmann';
@@ -68,8 +66,8 @@
             },
             err => {
               assert.equal(ironRequest.status, 422);
-              const response = ironRequest.parseResponse();
-              assert.equal(response, 'account is locked');
+              const payload = ironRequest.parseResponse();
+              assert(payload.locked, 'account is locked');
               done();
             });
         });
