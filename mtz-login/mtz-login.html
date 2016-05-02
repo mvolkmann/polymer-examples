@@ -35,8 +35,8 @@
       url="[[loginUrl]]"
       method="POST"
       body="{{requestBody}}"
+      content-type="application/x-www-form-urlencoded"
       handle-as="text"
-      headers='{"Content-Type": "application/json"}'
       on-error="handleError"
       on-response="handleResponse">
     </iron-ajax>
@@ -76,7 +76,7 @@
           value: 'Password'
         },
         requestBody: {
-          type: Object
+          type: String
         },
         username: {
           type: String,
@@ -97,10 +97,8 @@
         this.message = '';
       },
       login() {
-        this.requestBody = {
-          username: this.username,
-          password: this.password //TODO: HASH THIS!
-        }
+        this.requestBody =
+          `username=${this.username}&password=${this.password}`;
         return this.$.ajax.generateRequest();
       }
     });

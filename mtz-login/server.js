@@ -5,8 +5,10 @@ const cors = require('cors');
 const express = require('express');
 
 const app = express();
-app.use(bodyParser.json()); // handle Content-Type 'application/json' requests
-app.use(bodyParser.text()); // handle Content-Type 'text/plain' requests
+app.use(bodyParser.json()); // for Content-Type 'application/json'
+app.use(bodyParser.text()); // for Content-Type 'text/plain'
+// for Content-Type 'application/x-www-form-urlencoded'
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname));
 app.use(cors());
 
