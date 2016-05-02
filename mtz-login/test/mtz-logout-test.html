@@ -13,7 +13,7 @@
         test('can logout', () => {
           sessionStorage.token = 'some-token';
           sessionStorage.username = 'someuser';
-          MtzLogoutBehavior.logoutUrl = 'http://localhost:8081/logout';
+          MtzLogoutBehavior.logoutUrl = 'http://localhost:8081/rest/logout';
           MtzLogoutBehavior.logout();
           assert.isUndefined(sessionStorage.token);
           assert.isUndefined(sessionStorage.username);

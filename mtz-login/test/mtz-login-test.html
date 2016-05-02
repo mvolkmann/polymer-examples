@@ -17,10 +17,10 @@
 
         setup(() => {
           el = fixture('my-fixture');
+          el.loginUrl = 'http://localhost:8081/rest/login';
         });
 
         test('can login', done => {
-          el.loginUrl = 'http://localhost:8081/login';
           el.username = 'dweir';
           el.password = 'dw1';
           const ironRequest = el.login();
@@ -34,6 +34,42 @@
             err => {
               console.error('mtz-login-test.html can login: err =', err);
               assert.fail(null, null, err);
+              done();
+            });
+        });
+
+        /*
+        test('bad username/password', done => {
+          el.username = 'foo';
+          el.password = 'bar';
+          const ironRequest = el.login();
+          const promise = ironRequest.completes;
+          promise.then(
+            () => {
+              assert.fail(null, null, 'login should have failed');
+              done();
+            },
+            err => {
+              console.error('mtz-login-test.html can login: err =', err);
+              done();
+            });
+        });
+        */
+
+        test('account locked', done => {
+          el.username = 'mvolkmann';
+          el.password = 'mv1';
+          const ironRequest = el.login();
+          const promise = ironRequest.completes;
+          promise.then(
+            () => {
+              assert.fail(null, null, 'account should have been locked');
+              done();
+            },
+            err => {
+              assert.equal(ironRequest.status, 422);
+              const response = ironRequest.parseResponse();
+              assert.equal(response, 'account is locked');
               done();
             });
         });

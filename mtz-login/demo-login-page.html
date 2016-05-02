@@ -6,7 +6,7 @@
 <dom-module id="demo-login-page">
   <template>
   <mtz-login
-    login-url="http://localhost:8081/login"
+    login-url="http://localhost:8081/rest/login"
     username-prompt="El Namo"
     password-prompt="Pwd"></mtz-login>
     <paper-button raised on-click="logout">Logout</paper-button>
@@ -18,7 +18,7 @@
       properties: {
         logoutUrl: {
           type: String,
-          value: 'http://localhost:8081/logout'
+          value: 'http://localhost:8081/rest/logout'
         }
       }
     });

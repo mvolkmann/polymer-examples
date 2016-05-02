@@ -30,7 +30,7 @@ function getToken() {
 const GOOD_STATUS = 200;
 const BAD_STATUS = 422;
 
-app.post('/login', (req, res) => {
+app.post('/rest/login', (req, res) => {
   const {username, password} = req.body;
   const user = userMap[username];
 
@@ -53,7 +53,7 @@ app.post('/login', (req, res) => {
   res.status(status).send(payload);
 });
 
-app.post('/logout', (req, res) => {
+app.post('/rest/logout', (req, res) => {
   const username = req.query.username;
   console.log('got logout of', username);
   res.send();
