@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../web-component-tester/browser.js"></script>
+    <link rel="import" href="../mtz-logout-behavior.html">
+  </head>
+  <body>
+    <script>
+      suite('mtz-logout-behavior>', () => {
+        let el;
+
+        test('can logout', () => {
+          sessionStorage.token = 'some-token';
+          sessionStorage.username = 'someuser';
+          MtzLogoutBehavior.logoutUrl = 'http://localhost:8081/logout';
+          MtzLogoutBehavior.logout();
+          assert.isUndefined(sessionStorage.token);
+          assert.isUndefined(sessionStorage.username);
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,3 +1,5 @@
+<link rel="import" href="../iron-ajax/iron-ajax.html">
+
 <script>
   // Create an iron-ajax element to send logout POST request.
   const ajax = document.createElement('iron-ajax');
@@ -5,7 +7,6 @@
 
   // Setup success handler.
   ajax.addEventListener('response', event => {
-    sessionStorage.clear();
     console.log('successfully logged out');
   });
 
@@ -21,6 +22,7 @@
       const params = {username: sessionStorage.username};
       ajax.setAttribute('params', JSON.stringify(params));
       ajax.generateRequest();
+      sessionStorage.clear();
     }
   };
 </script>

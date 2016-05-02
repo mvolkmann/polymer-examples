@@ -98,13 +98,11 @@
         this.message = '';
       },
       login() {
-        console.log('mtz-login.html login: this.username =', this.username);
-        console.log('mtz-login.html login: this.password =', this.password);
         this.requestBody = {
           username: this.username,
           password: this.password //TODO: HASH THIS!
         }
-        this.$.ajax.generateRequest();
+        return this.$.ajax.generateRequest();
       }
     });
   </script>
