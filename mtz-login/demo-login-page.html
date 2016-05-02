@@ -5,13 +5,22 @@
 
 <dom-module id="demo-login-page">
   <template>
-    <mtz-login></mtz-login>
+  <mtz-login
+    login-url="http://localhost:8081/login"
+    username-prompt="El Namo"
+    password-prompt="Pwd"></mtz-login>
     <paper-button raised on-click="logout">Logout</paper-button>
   </template>
   <script>
     Polymer({
       is: 'demo-login-page',
-      behaviors: [MtzLogoutBehavior]
+      behaviors: [MtzLogoutBehavior],
+      properties: {
+        logoutUrl: {
+          type: String,
+          value: 'http://localhost:8081/logout'
+        }
+      }
     });
   </script>
 </dom-module>

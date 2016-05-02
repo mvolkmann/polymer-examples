@@ -32,7 +32,7 @@
     </style>
 
     <iron-ajax id="ajax"
-      url="http://localhost:8081/login"
+      url="[[loginUrl]]"
       method="POST"
       body="{{requestBody}}"
       handle-as="text"
@@ -42,11 +42,11 @@
     </iron-ajax>
 
     <iron-label>
-      <div class="label-text">User Name</div>
+      <div class="label-text">[[usernamePrompt]]</div>
       <paper-input no-label-float no-autocomplete value="{{username}}"/>
     </iron-label>
     <iron-label>
-      <div class="label-text">Password</div>
+      <div class="label-text">[[passwordPrompt]]</div>
       <paper-input no-label-float value="{{password}}" type="password"/>
     </iron-label>
     <iron-label>
@@ -60,6 +60,11 @@
     Polymer({
       is: 'mtz-login',
       properties: {
+        loginUrl: {
+          type: String,
+          //value: 'http://localhost:8081/login'
+          value: '/login'
+        },
         message: {
           type: String
         },
@@ -67,12 +72,20 @@
           type: String,
           value: ''
         },
+        passwordPrompt: {
+          type: String,
+          value: 'Password'
+        },
         requestBody: {
           type: Object
         },
         username: {
           type: String,
           value: ''
+        },
+        usernamePrompt: {
+          type: String,
+          value: 'User Name'
         }
       },
       handleError(event) {

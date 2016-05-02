@@ -1,7 +1,6 @@
 <script>
   // Create an iron-ajax element to send logout POST request.
   const ajax = document.createElement('iron-ajax');
-  ajax.setAttribute('url', 'http://localhost:8081/logout');
   ajax.setAttribute('method', 'POST');
 
   // Setup success handler.
@@ -18,6 +17,7 @@
   MtzLogoutBehavior = {
     logout() {
       // Send REST request to server to logout.
+      ajax.setAttribute('url', this.logoutUrl);
       const params = {username: sessionStorage.username};
       ajax.setAttribute('params', JSON.stringify(params));
       ajax.generateRequest();
