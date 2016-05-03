@@ -31,13 +31,17 @@
     /**
      * Registers a request for translation of a set of keys.
      * The supplied callback function will be passed a translation map
-     * every time the language is changed.
+     * initially, and again every time the language is changed.
      */
     getTranslations(keys, cb) {
       this._requests.push({keys, cb});
       this._notify();
     },
 
+    /**
+     * Call this to set the initial language,
+     * and again to change it.
+     */
     setLanguage(lang) {
       sessionStorage.preferredLanguage = lang;
 
