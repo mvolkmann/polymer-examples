@@ -15,7 +15,7 @@
         display: inline-block;
         margin-right: 10px;
         text-align: right;
-        width: 120px;
+        width: 140px;
       }
 
       iron-label {
@@ -52,7 +52,7 @@
     </iron-label>
     <iron-label>
       <div class="label-text"></div>
-      <paper-button raised on-click="login">[[loginLabelT]]</paper-button>
+      <paper-button raised on-click="login">[[loginT]]</paper-button>
     </iron-label>
     <div>[[message]]</div>
   </template>
@@ -62,6 +62,7 @@
       is: 'mtz-login',
       behaviors: [MtzLangTrans],
       properties: {
+        loginT: String,
         loginUrl: {
           type: String,
           value: '/login'
@@ -77,6 +78,7 @@
           type: String,
           value: 'Password'
         },
+        passwordLabelT: String,
         requestBody: {
           type: String
         },
@@ -87,7 +89,8 @@
         usernameLabel: {
           type: String,
           value: 'User Name'
-        }
+        },
+        usernameLabelT: String,
       },
       handleError(event) {
         //this.message = event.detail.request.xhr.responseText;
@@ -119,11 +122,13 @@
         return this.$.ajax.generateRequest();
       },
       ready() {
-        this.whenHaveTranslations(() => {
-          this.loginLabelT = this.translate('Login');
-          this.passwordLabelT = this.translate(this.passwordLabel);
-          this.usernameLabelT = this.translate(this.usernameLabel);
-        });
+        const keys = ['Login', this.passwordLabel, this.usernameLabel];
+        this.getTranslations(keys,
+          translations => {
+            this.loginT = translations.Login;
+            this.passwordLabelT = translations[this.passwordLabel];
+            this.usernameLabelT = translations[this.usernameLabel];
+          });
       }
     });
   </script>

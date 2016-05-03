@@ -2,14 +2,13 @@
   :root {
     font-family: sans-serif;
 
-    /*
     iron-label {
-      * Eliminate underline in paper-input elements. *
+      /* Eliminate underline in paper-input elements. */
       --paper-input-container-color: transparent;
       --paper-input-container-focus-color: transparent;
       --paper-input-container-invalid-color: transparent;
 
-      * Style paper-input elements like Bootstrap inputs. *
+      /* Style paper-input elements like Bootstrap inputs. */
       --paper-input-container: {
         border: solid gray 1px;
         border-radius: 5px;
@@ -21,7 +20,28 @@
         visibility: hidden;
       };
     }
-    */
+
+    /*TODO: Why does this overrided the variables in iron-label above? */
+    paper-dropdown-menu {
+      /* Eliminate underline in paper-input elements. */
+      --paper-input-container-color: var(--secondary-text-color);
+      --paper-input-container-focus-color: var(--primary-color);
+      --paper-input-container-invalid-color: var(--error-color);
+
+      /* Style paper-input elements like Bootstrap inputs. */
+      --paper-input-container: {
+        border: none;
+        padding: 0;
+      };
+
+      --paper-input-container-underline: {
+        visibility: visible;
+      };
+    }
+
+    --paper-button: {
+      text-transform: none;
+    };
 
     /* This is an attempt to stop Chrome from giving
        a yellow background to autocomplete inputs.

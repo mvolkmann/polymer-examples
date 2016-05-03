@@ -15,12 +15,13 @@
       <paper-button raised on-click="logout">[[logoutLabelT]]</paper-button>
     </div>
     <div>
-      <paper-dropdown-menu label="Language">
+      <!--paper-dropdown-menu label="Language" selected-item-label="{{selectedLanguage}}"-->
+      <paper-dropdown-menu label="Language" selected-item="{{selectedLanguage}}">
         <paper-listbox class="dropdown-content"
           selected=[[languageIndex]]>
-          <paper-item>English</paper-item>
-          <paper-item>Español</paper-item>
-          <paper-item>Français</paper-item>
+          <paper-item value="en">English</paper-item>
+          <paper-item value="es">Español</paper-item>
+          <paper-item value="fr">Français</paper-item>
         </paper-listbox>
       </paper-dropdown-menu>
     </div>
@@ -30,19 +31,31 @@
       is: 'demo-login-page',
       behaviors: [MtzLangTrans, MtzLogoutBehavior],
       properties: {
+        languageIndex: Number,
+        logoutLabelT: String,
         logoutUrl: {
           type: String,
           value: 'http://localhost:8081/rest/logout'
+        },
+        selectedLanguage: {
+          type: Object,
+          observer: '_changeLanguage'
         }
       },
       ready() {
         const languages = ['en', 'es', 'fr'];
-        this.languageIndex = 2;
+        this.languageIndex = 0;
         this.setLanguage(languages[this.languageIndex]);
 
-        this.whenHaveTranslations(() => {
-          this.logoutLabelT = this.translate('Logout');
-        });
+        const keys = ['Logout'];
+        this.getTranslations(keys,
+          translations => this.logoutLabelT = translations.Logout);
+      },
+      _changeLanguage(paperItemElement) {
+        if (!paperItemElement) return; // Why does this happen?
+        const lang = paperItemElement.getAttribute('value');
+        console.log('demo-login-page.html _changeLanguage: lang =', lang);
+        this.setLanguage(lang);
       }
     });
   </script>
