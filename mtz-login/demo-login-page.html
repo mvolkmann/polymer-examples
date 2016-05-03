@@ -3,9 +3,8 @@
 <link rel="import" href="../paper-dropdown-menu/paper-dropdown-menu.html">
 <link rel="import" href="../paper-item/paper-item.html">
 <link rel="import" href="../paper-listbox/paper-listbox.html">
-<link rel="import" href="./mtz-lang-trans.html">
+<link rel="import" href="./mtz-lang-trans-behavior.html">
 <link rel="import" href="./mtz-login.html">
-<link rel="import" href="./mtz-lang-trans.html">
 <link rel="import" href="./mtz-logout-behavior.html">
 
 <dom-module id="demo-login-page">
@@ -29,7 +28,7 @@
   <script>
     Polymer({
       is: 'demo-login-page',
-      behaviors: [MtzLangTrans, MtzLogoutBehavior],
+      behaviors: [MtzLangTransBehavior, MtzLogoutBehavior],
       properties: {
         languageIndex: Number,
         languageT: String,
