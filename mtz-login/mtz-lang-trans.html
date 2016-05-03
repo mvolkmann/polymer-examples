@@ -1,0 +1,39 @@
+<script>
+  let translationsMap = {};
+
+  // Create an iron-ajax element to send GET request.
+  const ajax = document.createElement('iron-ajax');
+  ajax.setAttribute('method', 'GET');
+
+  // Setup success handler.
+  ajax.addEventListener('response', event => {
+    const translations = event.detail.xhr.response;
+    const lang = sessionStorage.preferredLanguage;
+    translationsMap[lang] = translations;
+  });
+
+  MtzLangTrans = {
+    whenHaveTranslations(fn) {
+      const lang = sessionStorage.preferredLanguage || 'en';
+      const translations = translationsMap[lang];
+      if (translations) {
+        fn();
+      } else {
+        setTimeout(() => this.whenHaveTranslations(fn), 100);
+      }
+    },
+    setLanguage(lang) {
+      sessionStorage.preferredLanguage = lang;
+
+      // Send REST request to get translations for lang.
+      const url = `http://localhost:8080/components/todo/translations/${lang}.json`;
+      ajax.setAttribute('url', url);
+      ajax.generateRequest();
+    },
+    translate(key) {
+      const lang = sessionStorage.preferredLanguage || 'en';
+      const translations = translationsMap[lang];
+      return translations ? translations[key] || key : key;
+    }
+  };
+</script>

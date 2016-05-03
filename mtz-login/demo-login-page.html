@@ -1,25 +1,48 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../paper-item/paper-item.html">
+<link rel="import" href="../paper-listbox/paper-listbox.html">
+<link rel="import" href="./mtz-lang-trans.html">
 <link rel="import" href="./mtz-login.html">
+<link rel="import" href="./mtz-lang-trans.html">
 <link rel="import" href="./mtz-logout-behavior.html">
 
 <dom-module id="demo-login-page">
   <template>
-  <mtz-login
-    login-url="http://localhost:8081/rest/login"
-    username-prompt="El Namo"
-    password-prompt="Pwd"></mtz-login>
-    <paper-button raised on-click="logout">Logout</paper-button>
+    <mtz-login login-url="http://localhost:8081/rest/login"></mtz-login>
+    <div>
+      <paper-button raised on-click="logout">[[logoutLabelT]]</paper-button>
+    </div>
+    <div>
+      <paper-dropdown-menu label="Language">
+        <paper-listbox class="dropdown-content"
+          selected=[[languageIndex]]>
+          <paper-item>English</paper-item>
+          <paper-item>Español</paper-item>
+          <paper-item>Français</paper-item>
+        </paper-listbox>
+      </paper-dropdown-menu>
+    </div>
   </template>
   <script>
     Polymer({
       is: 'demo-login-page',
-      behaviors: [MtzLogoutBehavior],
+      behaviors: [MtzLangTrans, MtzLogoutBehavior],
       properties: {
         logoutUrl: {
           type: String,
           value: 'http://localhost:8081/rest/logout'
         }
+      },
+      ready() {
+        const languages = ['en', 'es', 'fr'];
+        this.languageIndex = 2;
+        this.setLanguage(languages[this.languageIndex]);
+
+        this.whenHaveTranslations(() => {
+          this.logoutLabelT = this.translate('Logout');
+        });
       }
     });
   </script>
