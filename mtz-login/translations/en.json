@@ -1,2 +1,4 @@
 {
+  "account-invalid": "invalid username or password",
+  "account-locked": "account is locked"
 }

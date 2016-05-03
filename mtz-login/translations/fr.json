@@ -1,4 +1,7 @@
 {
+  "account-invalid": "nom d'utilisateur ou mot de passe incorrect",
+  "account-locked": "compte est verrouillé",
+  "Language": "la Langue",
   "Login": "S'identifier",
   "Logout": "Se Déconnecter",
   "Password": "Mot de Passe",

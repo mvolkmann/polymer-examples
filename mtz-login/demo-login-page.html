@@ -12,11 +12,11 @@
   <template>
     <mtz-login login-url="http://localhost:8081/rest/login"></mtz-login>
     <div>
-      <paper-button raised on-click="logout">[[logoutLabelT]]</paper-button>
+      <paper-button raised on-click="logout">[[logoutT]]</paper-button>
     </div>
     <div>
-      <!--paper-dropdown-menu label="Language" selected-item-label="{{selectedLanguage}}"-->
-      <paper-dropdown-menu label="Language" selected-item="{{selectedLanguage}}">
+      <paper-dropdown-menu label="[[languageT]]"
+        selected-item="{{selectedLanguage}}">
         <paper-listbox class="dropdown-content"
           selected=[[languageIndex]]>
           <paper-item value="en">English</paper-item>
@@ -32,7 +32,8 @@
       behaviors: [MtzLangTrans, MtzLogoutBehavior],
       properties: {
         languageIndex: Number,
-        logoutLabelT: String,
+        languageT: String,
+        logoutT: String,
         logoutUrl: {
           type: String,
           value: 'http://localhost:8081/rest/logout'
@@ -47,14 +48,16 @@
         this.languageIndex = 0;
         this.setLanguage(languages[this.languageIndex]);
 
-        const keys = ['Logout'];
+        const keys = ['Language', 'Logout'];
         this.getTranslations(keys,
-          translations => this.logoutLabelT = translations.Logout);
+          translations => {
+            this.languageT = translations.Language;
+            this.logoutT = translations.Logout;
+          });
       },
       _changeLanguage(paperItemElement) {
         if (!paperItemElement) return; // Why does this happen?
         const lang = paperItemElement.getAttribute('value');
-        console.log('demo-login-page.html _changeLanguage: lang =', lang);
         this.setLanguage(lang);
       }
     });

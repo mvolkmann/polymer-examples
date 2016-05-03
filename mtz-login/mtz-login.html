@@ -67,9 +67,8 @@
           type: String,
           value: '/login'
         },
-        message: {
-          type: String
-        },
+        message: String,
+        messageKey: String,
         password: {
           type: String,
           value: ''
@@ -79,9 +78,8 @@
           value: 'Password'
         },
         passwordLabelT: String,
-        requestBody: {
-          type: String
-        },
+        requestBody: String,
+        translations: Object,
         username: {
           type: String,
           value: ''
@@ -93,18 +91,20 @@
         usernameLabelT: String,
       },
       handleError(event) {
-        //this.message = event.detail.request.xhr.responseText;
         const UNAUTHORIZED = 401;
         const xhr = event.detail.request.xhr;
         const status = xhr.status;
         const payload = xhr.response;
+
         if (status === UNAUTHORIZED) {
-          this.message = 'invalid username or password';
+          this.messageKey = 'account-invalid';
         } else if (payload.locked) {
-          this.message = 'account is locked';
+          this.messageKey = 'account-locked';
         } else {
           console.error('mtz-login.html handleError: unexpected condition');
         }
+
+        this.message = this.translations[this.messageKey];
       },
       handleResponse(event) {
         const payload = event.detail.response;
@@ -114,7 +114,7 @@
 
         sessionStorage.username = this.username;
 
-        this.message = '';
+        this.messageKey = null;
       },
       login() {
         this.requestBody =
@@ -122,10 +122,20 @@
         return this.$.ajax.generateRequest();
       },
       ready() {
-        const keys = ['Login', this.passwordLabel, this.usernameLabel];
+        const keys = [
+          'account-invalid',
+          'account-locked',
+          'Login',
+          this.passwordLabel,
+          this.usernameLabel
+          ];
         this.getTranslations(keys,
           translations => {
+            this.translations = translations;
+            this.accountInvalidT = translations['account-invalid'];
+            this.accountLockedT = translations['account-locked'];
             this.loginT = translations.Login;
+            this.message = translations[this.messageKey];
             this.passwordLabelT = translations[this.passwordLabel];
             this.usernameLabelT = translations[this.usernameLabel];
           });
