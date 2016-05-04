@@ -1,44 +1,25 @@
+<link rel="import" href="../iron-ajax/iron-ajax.html">
+
 <script>
+  let _elements = []; // GLOBAL!
+  let _translations = {}; // GLOBAL!
+
   /**
    * @polymerBehavior MtzLangTrans
    */
   MtzLangTransBehavior = {
-    _requests: [],
-
-    _notify() {
-      // If the Ajax call hasn't returned the translations yet, bail out.
-      if (!this._translations) return;
-
-      for (const request of this._requests) {
-        const keys = request.keys;
-        const map = request.keys.reduce(
-          (map, key) => {
-            map[key] = this._translations[key] || key;
-            return map;
-          },
-          {});
-        request.cb(map);
+    properties: {
+      _ts: {
+        type: Number,
+        notify: true,
+        readonly: true,
+        value: 0
       }
     },
 
-    _setup() {
-      // Create an iron-ajax element to send GET request.
-      this.ajax = document.createElement('iron-ajax');
-      //this.ajax.setAttribute('method', 'GET');
-      this.ajax.addEventListener('response', event => {
-        this._translations = event.detail.xhr.response;
-        this._notify();
-      });
-    },
-
-    /**
-     * Registers a request for translation of a set of keys.
-     * The supplied callback function will be passed a translation map
-     * initially, and again every time the language is changed.
-     */
-    getTranslations(keys, cb) {
-      this._requests.push({keys, cb});
-      this._notify();
+    ready() {
+      // Save reference to each element that uses this behavior.
+      _elements.push(this);
     },
 
     /**
@@ -48,12 +29,31 @@
     setLanguage(lang) {
       sessionStorage.preferredLanguage = lang;
 
-      if (!this.ajax) this._setup();
+      if (!this.ajax) {
+        // Create an iron-ajax element to send GET request.
+        this.ajax = document.createElement('iron-ajax');
+
+        this.ajax.addEventListener('response', event => {
+          _translations = event.detail.xhr.response;
+
+          // Notify each element that uses this behavior
+          // that translations have been changed.
+          _elements.forEach(e => e._ts = Date.now());
+        });
+      }
 
       // Send Ajax request to get translations for lang.
       const url = `http://localhost:8080/components/todo/translations/${lang}.json`;
       this.ajax.setAttribute('url', url);
+      console.log('mtz-lang-trans-behavior.html setLanguage: later, this.ajax =', this.ajax);
       this.ajax.generateRequest();
+    },
+
+    /**
+     * Gets the current language translation for a given key.
+     */
+    translate(key) {
+      return _translations[key] || key;
     }
   };
 </script>

@@ -32,7 +32,6 @@
               done();
             },
             err => {
-              console.error('mtz-login-test.html can login: err =', err);
               assert.fail(null, null, err);
               done();
             });
@@ -48,10 +47,7 @@
               assert.fail(null, null, 'login should have failed');
               done();
             },
-            err => {
-              console.log('mtz-login-test.html can login: err =', err);
-              done();
-            });
+            err => done());
         });
 
         test('account locked', done => {

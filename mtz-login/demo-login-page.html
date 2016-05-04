@@ -11,10 +11,13 @@
   <template>
     <mtz-login login-url="http://localhost:8081/rest/login"></mtz-login>
     <div>
-      <paper-button raised on-click="logout">[[logoutT]]</paper-button>
+      <paper-button raised on-click="logout">
+        [[translate('Logout', _ts)]]
+      </paper-button>
     </div>
     <div>
-      <paper-dropdown-menu label="[[languageT]]"
+      <paper-dropdown-menu
+        label="[[translate('Language', _ts)]]"
         selected-item="{{selectedLanguage}}">
         <paper-listbox class="dropdown-content"
           selected=[[languageIndex]]>
@@ -25,12 +28,16 @@
       </paper-dropdown-menu>
     </div>
   </template>
+
   <script>
     Polymer({
       is: 'demo-login-page',
       behaviors: [MtzLangTransBehavior, MtzLogoutBehavior],
       properties: {
-        languageIndex: Number,
+        languageIndex: {
+          type: Number,
+          value: 2
+        },
         languageT: String,
         logoutT: String,
         logoutUrl: {
@@ -42,18 +49,7 @@
           observer: '_changeLanguage'
         }
       },
-      ready() {
-        const languages = ['en', 'es', 'fr'];
-        this.languageIndex = 0;
-        this.setLanguage(languages[this.languageIndex]);
 
-        const keys = ['Language', 'Logout'];
-        this.getTranslations(keys,
-          translations => {
-            this.languageT = translations.Language;
-            this.logoutT = translations.Logout;
-          });
-      },
       _changeLanguage(paperItemElement) {
         if (!paperItemElement) return; // Why does this happen?
         const lang = paperItemElement.getAttribute('value');

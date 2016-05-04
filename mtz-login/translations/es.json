@@ -1,6 +1,7 @@
 {
   "account-invalid": "usuario o contraseña invalido",
   "account-locked": "la cuenta está bloqueada",
+  "Hello": "¡Hola",
   "Language": "Idioma",
   "Login": "Iniciar Sesión",
   "Logout": "Cerrar Sesión",
