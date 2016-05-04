@@ -1,0 +1,68 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-label/iron-label.html">
+<link rel="import" href="../paper-input/paper-input.html">
+
+<dom-module id="mtz-label-input">
+  <template>
+    <style is="custom-style">
+      :host {
+      }
+
+      .label {
+        display: var(--label-display, block);
+        margin-right: 10px;
+        text-align: var(--label-text-align, left);
+        width: var(--label-width, 140px);
+      }
+
+      iron-label {
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      paper-button {
+        margin-left: 0;
+      }
+
+      paper-input {
+        display: inline-block;
+      }
+    </style>
+
+    <iron-label>
+      <div class="label">[[label]]</div>
+      <paper-input no-label-float no-autocomplete value="{{value}}"/>
+    </iron-label>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'mtz-label-input',
+      properties: {
+        label: String,
+        labelWidth: Number,
+        layout: {
+          type: String,
+          value: 'v'
+          // v = vertical
+          // hl = horizontal left-aligned
+          // hr = horizontal right-aligned
+        },
+        value: {
+          type: String,
+          notify: true
+        }
+      },
+
+      ready() {
+        if (this.layout !== 'v') {
+          this.customStyle['--label-display'] = 'inline-block';
+        }
+        if (this.layout === 'hr') {
+          this.customStyle['--label-text-align'] = 'right';
+        }
+        this.updateStyles();
+      }
+    });
+  </script>
+</dom-module>

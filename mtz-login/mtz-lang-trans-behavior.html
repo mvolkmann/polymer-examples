@@ -45,7 +45,6 @@
       // Send Ajax request to get translations for lang.
       const url = `http://localhost:8080/components/todo/translations/${lang}.json`;
       this.ajax.setAttribute('url', url);
-      console.log('mtz-lang-trans-behavior.html setLanguage: later, this.ajax =', this.ajax);
       this.ajax.generateRequest();
     },
 
