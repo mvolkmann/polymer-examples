@@ -43,19 +43,23 @@
       on-response="_handleResponse">
     </iron-ajax>
 
-    <mtz-label-input label="Foo" value="foo" layout="hr"></mtz-label-input>
+    <mtz-label-input label="Foo" value="foo" layout="v"></mtz-label-input>
+
     <iron-label>
       <div class="label-text">
         [[translate(usernameLabel, _ts)]]
       </div>
-      <paper-input no-label-float no-autocomplete value="{{username}}"/>
+      <paper-input no-label-float no-autocomplete value="{{username}}"></paper-input>
     </iron-label>
+
     <iron-label>
       <div class="label-text">
         [[translate(passwordLabel, _ts)]]
       </div>
-      <paper-input no-label-float value="{{password}}" type="password"/>
+      <paper-input no-label-float value="{{password}}" type="password"></paper-input>
+      <a href="#" on-click="resetPassword">forgot</a>
     </iron-label>
+
     <iron-label>
       <div class="label-text"></div>
       <paper-button raised on-click="login">
@@ -124,6 +128,10 @@
         this.requestBody =
           `username=${this.username}&password=${this.password}`;
         return this.$.ajax.generateRequest();
+      },
+
+      resetPassword() {
+        console.log('mtz-login.html resetPassword: entered');
       }
     });
   </script>
