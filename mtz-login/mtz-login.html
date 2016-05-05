@@ -79,6 +79,7 @@
           value: '/login'
         },
         messageKey: String,
+        nextUrl: String,
         password: {
           type: String,
           value: ''
@@ -122,6 +123,8 @@
         sessionStorage.username = this.username;
 
         this.messageKey = null;
+
+        location.href = this.nextUrl;
       },
 
       login() {

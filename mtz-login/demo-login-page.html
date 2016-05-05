@@ -9,7 +9,10 @@
 
 <dom-module id="demo-login-page">
   <template>
-    <mtz-login login-url="http://localhost:8081/rest/login"></mtz-login>
+    <mtz-login
+      login-url="http://localhost:8081/rest/login"
+      next-url="http://ociweb.com/mark">
+    </mtz-login>
     <div>
       <paper-button raised on-click="logout">
         [[translate('Logout', _ts)]]
