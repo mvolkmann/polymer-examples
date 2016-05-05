@@ -1,6 +1,7 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../iron-ajax/iron-ajax.html">
 <link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../paper-dialog/paper-dialog.html">
 <link rel="import" href="../paper-input/paper-input.html">
 <link rel="import" href="./mtz-label-input.html">
 <link rel="import" href="./mtz-lang-trans-behavior.html">
@@ -9,13 +10,7 @@
   <template>
     <style is="custom-style">
       :host {
-      }
-
-      .label-text {
-        display: inline-block;
-        margin-right: 10px;
-        text-align: right;
-        width: 140px;
+        --label-width: 100px; // need 140 for Spanish
       }
 
       iron-label {
@@ -57,6 +52,22 @@
       </paper-button>
     </mtz-label-input>
     <div>[[translate(messageKey, _ts)]]</div>
+
+    <paper-dialog id="passwordResetDialog">
+      <h2>Password Reset</h2>
+      <p>
+        <mtz-label-input label="[[translate('User Name', _ts)]]" layout="[[layout]]">
+          <paper-input no-label-float no-autocomplete autofocus value="{{username}}"></paper-input>
+        </mtz-label-input>
+        <mtz-label-input label="[[translate('Email', _ts)]]" layout="[[layout]]">
+          <paper-input no-label-float no-autocomplete value="{{email}}"></paper-input>
+        </mtz-label-input>
+      </p>
+      <div class="buttons">
+        <paper-button dialog-dismiss>Cancel</paper-button>
+        <paper-button dialog-dismiss on-click="_submitPasswordReset">Submit</paper-button>
+      </div>
+    </paper-dialog>
   </template>
 
   <script>
@@ -121,6 +132,11 @@
         location.href = this.nextUrl;
       },
 
+      _submitPasswordReset() {
+        console.log('mtz-login.html _submitPasswordReset: this.username =', this.username);
+        console.log('mtz-login.html _submitPasswordReset: this.email =', this.email);
+      },
+
       login() {
         this.requestBody =
           `username=${this.username}&password=${this.password}`;
@@ -128,7 +144,7 @@
       },
 
       resetPassword() {
-        console.log('mtz-login.html resetPassword: entered');
+        this.$.passwordResetDialog.open();
       }
     });
   </script>
