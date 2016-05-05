@@ -1,6 +1,5 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../iron-ajax/iron-ajax.html">
-<link rel="import" href="../iron-label/iron-label.html">
 <link rel="import" href="../paper-button/paper-button.html">
 <link rel="import" href="../paper-input/paper-input.html">
 <link rel="import" href="./mtz-label-input.html">
@@ -43,29 +42,20 @@
       on-response="_handleResponse">
     </iron-ajax>
 
-    <mtz-label-input label="Foo" value="foo" layout="v"></mtz-label-input>
-
-    <iron-label>
-      <div class="label-text">
-        [[translate(usernameLabel, _ts)]]
-      </div>
+    <mtz-label-input label="[[translate(usernameLabel, _ts)]]" layout="[[layout]]">
       <paper-input no-label-float no-autocomplete value="{{username}}"></paper-input>
-    </iron-label>
+    </mtz-label-input>
 
-    <iron-label>
-      <div class="label-text">
-        [[translate(passwordLabel, _ts)]]
-      </div>
+    <mtz-label-input label="[[translate(passwordLabel, _ts)]]" layout="[[layout]]">
       <paper-input no-label-float value="{{password}}" type="password"></paper-input>
       <a href="#" on-click="resetPassword">forgot</a>
-    </iron-label>
+    </mtz-label-input>
 
-    <iron-label>
-      <div class="label-text"></div>
+    <mtz-label-input label="" layout="[[layout]]">
       <paper-button raised on-click="login">
         [[translate('Login', _ts)]]
       </paper-button>
-    </iron-label>
+    </mtz-label-input>
     <div>[[translate(messageKey, _ts)]]</div>
   </template>
 
@@ -74,6 +64,10 @@
       is: 'mtz-login',
       behaviors: [MtzLangTransBehavior],
       properties: {
+        layout: {
+          type: String,
+          value: 'hr'
+        },
         loginUrl: {
           type: String,
           value: '/login'

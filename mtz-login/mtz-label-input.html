@@ -1,6 +1,5 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../iron-label/iron-label.html">
-<link rel="import" href="../paper-input/paper-input.html">
 
 <dom-module id="mtz-label-input">
   <template>
@@ -31,7 +30,7 @@
 
     <iron-label>
       <div class="label">[[label]]</div>
-      <paper-input no-label-float no-autocomplete value="{{value}}"/>
+      <content></content>
     </iron-label>
   </template>
 
@@ -47,10 +46,6 @@
           // v = vertical
           // hl = horizontal left-aligned
           // hr = horizontal right-aligned
-        },
-        value: {
-          type: String,
-          notify: true
         }
       },
 
