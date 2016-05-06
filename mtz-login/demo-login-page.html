@@ -9,7 +9,7 @@
 
 <dom-module id="demo-login-page">
   <template>
-    <mtz-login
+    <mtz-login id="foo"
       layout="hr"
       login-url="http://localhost:8081/rest/login"
       next-url="http://ociweb.com/mark">
@@ -20,7 +20,7 @@
       </paper-button>
     </div>
     <div>
-      <paper-dropdown-menu
+      <paper-dropdown-menu id="bar"
         label="[[translate('Language', _ts)]]"
         selected-item="{{selectedLanguage}}">
         <paper-listbox class="dropdown-content"
@@ -30,6 +30,13 @@
           <paper-item value="fr">Français</paper-item>
         </paper-listbox>
       </paper-dropdown-menu>
+      <!--mtz-label-input label="[[translate('Language', _ts)]]">
+        <select value="{{selectedLanguage::change}}">
+          <option value="en">English</option>
+          <option value="es">Español</option>
+          <option value="fr">Français</option>
+        </select>
+      </mtz-label-input-->
     </div>
   </template>
 
@@ -60,5 +67,15 @@
         this.setLanguage(lang);
       }
     });
+
+    /*
+    console.log('demo-login-page.html ready: CSS variables');
+    const styles = getComputedStyle(document.documentElement);
+    Object.keys(styles).forEach(key => {
+      if (key.startsWith('--')) {
+        console.log('found variable', key)
+      }
+    });
+    */
   </script>
 </dom-module>
