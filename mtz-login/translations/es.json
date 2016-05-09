@@ -1,10 +1,14 @@
 {
   "account-invalid": "usuario o contraseña invalido",
   "account-locked": "la cuenta está bloqueada",
+  "Cancel": "Cancelar",
+  "forgot": "olvidó",
   "Hello": "¡Hola",
   "Language": "Idioma",
   "Login": "Iniciar Sesión",
   "Logout": "Cerrar Sesión",
   "Password": "Contraseña",
+  "Password Reset": "Restablecimiento de contraseña",
+  "Submit": "Enviar",
   "User Name": "Nombre de Usuario"
 }

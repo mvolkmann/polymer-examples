@@ -43,7 +43,9 @@
 
     <mtz-label-input label="[[translate(passwordLabel, _ts)]]" layout="[[layout]]">
       <paper-input no-label-float value="{{password}}" type="password"></paper-input>
-      <a href="#" on-click="resetPassword">forgot</a>
+      <a href="#" on-click="resetPassword">
+        [[translate('forgot', _ts)]]
+      </a>
     </mtz-label-input>
 
     <mtz-label-input label="" layout="[[layout]]">
@@ -54,7 +56,7 @@
     <div>[[translate(messageKey, _ts)]]</div>
 
     <paper-dialog id="passwordResetDialog">
-      <h2>Password Reset</h2>
+      <h2>[[translate('Password Reset', _ts)]]</h2>
       <p>
         <mtz-label-input label="[[translate('User Name', _ts)]]" layout="[[layout]]">
           <paper-input no-label-float no-autocomplete autofocus value="{{username}}"></paper-input>
@@ -64,8 +66,12 @@
         </mtz-label-input>
       </p>
       <div class="buttons">
-        <paper-button dialog-dismiss>Cancel</paper-button>
-        <paper-button dialog-dismiss on-click="_submitPasswordReset">Submit</paper-button>
+        <paper-button dialog-dismiss>
+          [[translate('Cancel', _ts)]]
+        </paper-button>
+        <paper-button dialog-dismiss on-click="_submitPasswordReset">
+          [[translate('Submit', _ts)]]
+        </paper-button>
       </div>
     </paper-dialog>
   </template>

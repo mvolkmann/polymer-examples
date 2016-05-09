@@ -52,12 +52,12 @@
 
       ready() {
         const labelLayout = this.customStyle['--label-layout'];
-        console.log('mtz-label-input.html ready: labelLayout =', labelLayout);
+        //console.log('mtz-label-input.html ready: labelLayout =', labelLayout);
 
         const styles = getComputedStyle(document.body);
-        console.log('mtz-label-input.html ready: styles =', styles);
+        //console.log('mtz-label-input.html ready: styles =', styles);
         const value = styles.getPropertyValue('--label-layout');
-         console.log('mtz-label-input.html ready: value =', value);
+        //console.log('mtz-label-input.html ready: value =', value);
 
         if (this.layout !== 'v') {
           this.customStyle['--label-display'] = 'inline-block';

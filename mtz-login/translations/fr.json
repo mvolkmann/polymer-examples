@@ -1,10 +1,14 @@
 {
   "account-invalid": "nom d'utilisateur ou mot de passe incorrect",
   "account-locked": "compte est verrouillé",
+  "Cancel": "Annuler",
+  "forgot": "oublié",
   "Hello": "Bonjour",
   "Language": "la Langue",
   "Login": "S'identifier",
   "Logout": "Se Déconnecter",
   "Password": "Mot de Passe",
+  "Password Reset": "Réinitialiser le mot de passe",
+  "Submit": "Soumettre",
   "User Name": "Nom d'utilisateur"
 }

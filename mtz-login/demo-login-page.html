@@ -12,7 +12,7 @@
     <mtz-login id="foo"
       layout="hr"
       login-url="http://localhost:8081/rest/login"
-      next-url="http://ociweb.com/mark">
+      next-url="http://polymer-project.org">
     </mtz-login>
     <div>
       <paper-button raised on-click="logout">
@@ -24,7 +24,7 @@
         label="[[translate('Language', _ts)]]"
         selected-item="{{selectedLanguage}}">
         <paper-listbox class="dropdown-content"
-          selected=[[languageIndex]]>
+          selected=0>
           <paper-item value="en">English</paper-item>
           <paper-item value="es">Español</paper-item>
           <paper-item value="fr">Français</paper-item>
@@ -45,12 +45,6 @@
       is: 'demo-login-page',
       behaviors: [MtzLangTransBehavior, MtzLogoutBehavior],
       properties: {
-        languageIndex: {
-          type: Number,
-          value: 0
-        },
-        languageT: String,
-        logoutT: String,
         logoutUrl: {
           type: String,
           value: 'http://localhost:8081/rest/logout'
@@ -62,20 +56,9 @@
       },
 
       _changeLanguage(paperItemElement) {
-        if (!paperItemElement) return; // Why does this happen?
         const lang = paperItemElement.getAttribute('value');
         this.setLanguage(lang);
       }
     });
-
-    /*
-    console.log('demo-login-page.html ready: CSS variables');
-    const styles = getComputedStyle(document.documentElement);
-    Object.keys(styles).forEach(key => {
-      if (key.startsWith('--')) {
-        console.log('found variable', key)
-      }
-    });
-    */
   </script>
 </dom-module>
