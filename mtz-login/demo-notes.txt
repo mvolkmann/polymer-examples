@@ -1,0 +1,56 @@
+Notes on providing a demo of the mtz-login component
+
+- Start the app by following the instructions in README.txt.
+
+- Files
+  * index.html uses demo-login-page
+  * demo-login-page uses mtz-login and
+    includes the "Logout" button and
+    a dropdown menu for selecting a language
+    - the function that is called when the Logout button
+      is pressed is provided by mtz-logout-behavior
+    - this allows apps to support other logout UIs
+      such as a hyperlink instead of a button
+  * mtz-login uses paper elements and iron-ajax;
+    only includes inputs for username and password
+    and the "Login" button
+
+- There are three known users.
+  * dweir/dw1
+  * amurdock/am1
+  * mvolkmann/mv1
+
+- enter an invalid username and/or password
+  and press the Login button
+  * message "invalid username or password" is displayed
+
+- enter mvolkmann/mv1 and press the "Login" button
+  * note that the account for this user is locked
+
+- enter dweir/dw1 and press the "Login" button
+  * this will succeed and direct the user to the home page
+    which is currently configured to be the main Polymer page
+  * press the browser back button to return to the login page
+  * show the contents of sessionStorage using Chrome Developer Tools
+    - will contain "preferredLanguage",
+      "token" (the authentication token returned by the login process),
+      and "username"
+  * press the "Logout" button
+  * note that sessionStorage has been cleared
+
+- press the "forgot" link
+  * will see a dialog prompting for username and email address
+  * this is a work in progress
+  * it will email a password reset link to the user
+    if the email address they provide
+    matches the one on file for that username
+
+- select different languages from the language dropdown
+  * show that all the text except the heading "Demo Login Page"
+    is translated
+  * this is performed by mtz-trans-lang-behavior which provides
+    setLanguage and translate methods that any element
+    which includes the behavior can call
+  * language translations are stored in JSON files
+    in the translations directory
+    - show es.json or fr.json for examples

@@ -67,7 +67,9 @@
           flavor = [[flavor]]
         </div>
 
-        <paper-date-picker date="April 16, 1961"></paper-date-picker>
+        <!--paper-date-picker date="April 16, 1961"></paper-date-picker-->
+        <paper-date-picker date="{{date}}"></paper-date-picker>
+        <div>You selected [[date]].</div>
 
         <div>
           <vaadin-date-picker label="Birthday" value="{{birthday}}">
@@ -75,7 +77,8 @@
           Your birthday is [[birthday]].
         </div>
 
-        <paper-input id="filter" label="Filter by name"></paper-input>
+        <paper-input id="filter" label="Filter by name" value="{{_nameFilter}}">
+        </paper-input>
         <vaadin-grid id="myGrid" selection-mode="multi">
           <table>
             <colgroup>
@@ -117,31 +120,30 @@
           type: String,
           value: '1961-04-16'
         },
+        date: {
+          type: String,
+          value: () => new Date(2016, 3, 16)
+        },
         flavor: {
           type: String,
           value: 'v' // initial value
         },
-        hungry: Boolean
+        hungry: Boolean,
+        _nameFilter: {
+          type: String,
+          observer: '_nameFilterChanged'
+        }
       },
       ready() {
         this.submitDialog = this.$.submitDialog;
 
         // Populate the grid.
         const grid = this.$.myGrid;
-        const data = [
+        this._data = [
           {name: 'Mark', color: 'yellow'},
           {name: 'Tami', color: 'blue'}
         ];
-        grid.items = data;
-
-        // Implement row filtering.
-        const filterInput = this.$.filter;
-        filterInput.addEventListener('value-changed', () => {
-          const filterText = filterInput.value.toLowerCase();
-          grid.items = filterText ?
-            data.filter(item => item.name.toLowerCase().includes(filterText)) :
-            data;
-        });
+        grid.items = this._data;
 
         // Implement row sorting.
         const props = ['name', 'color'];
@@ -151,6 +153,14 @@
           const direction = so.direction === 'asc' ? -1 : 1;
           grid.items.sort((a, b) => a[prop] < b[prop] ? direction : -direction);
         });
+      },
+      _nameFilterChanged() { // implements row filtering
+        const data = this._data;
+        if (!data) return;
+        const filterText = this._nameFilter.toLowerCase();
+        this.$.myGrid.items = filterText ?
+          data.filter(item => item.name.toLowerCase().includes(filterText)) :
+          data;
       },
       _onSubmit() {
         this.submitDialog.open();

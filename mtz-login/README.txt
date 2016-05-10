@@ -3,3 +3,5 @@ Steps to run
 - bower install
 - npm start
 - polyserve -o
+- browse http://localhost:8080/components/mtz-login/
+  if it doesn't open automatically
