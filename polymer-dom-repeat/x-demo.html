@@ -3,7 +3,7 @@
 <dom-module id="x-demo">
   <template>
     <h1>People List</h1>
-    <template is="dom-repeat" items="{{people}}" as="person"
+    <template is="dom-repeat" items="[[people]]" as="person"
       filter="_personFilter"
       sort="_personComparator">
       <div>{{person.name}} is a {{person.profession}}.</div>
